@@ -10,6 +10,11 @@ import UIKit
 import LBTATools
 
 class UserProfileVC: UIViewController {
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
      view.backgroundColor = .gray
 

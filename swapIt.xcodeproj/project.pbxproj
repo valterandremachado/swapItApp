@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		524FC30823DC7B3100DF2BF2 /* CollectionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524FC30723DC7B3100DF2BF2 /* CollectionsCell.swift */; };
+		524FC30A23DC7BF200DF2BF2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524FC30923DC7BF200DF2BF2 /* Extensions.swift */; };
+		524FC30D23DCB43600DF2BF2 /* SwapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524FC30C23DCB43600DF2BF2 /* SwapVC.swift */; };
+		524FC30F23DCB47400DF2BF2 /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524FC30E23DCB47400DF2BF2 /* ExploreVC.swift */; };
+		524FC31123DCB66100DF2BF2 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524FC31023DCB66100DF2BF2 /* TabController.swift */; };
 		52873A1323D9CC6E00E0617F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52873A1223D9CC6E00E0617F /* AppDelegate.swift */; };
 		52873A1523D9CC6E00E0617F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52873A1423D9CC6E00E0617F /* SceneDelegate.swift */; };
 		52873A1723D9CC6E00E0617F /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52873A1623D9CC6E00E0617F /* LoginVC.swift */; };
@@ -25,6 +30,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		524FC30723DC7B3100DF2BF2 /* CollectionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsCell.swift; sourceTree = "<group>"; };
+		524FC30923DC7BF200DF2BF2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		524FC30C23DCB43600DF2BF2 /* SwapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapVC.swift; sourceTree = "<group>"; };
+		524FC30E23DCB47400DF2BF2 /* ExploreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
+		524FC31023DCB66100DF2BF2 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		52873A0F23D9CC6E00E0617F /* swapIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swapIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52873A1223D9CC6E00E0617F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52873A1423D9CC6E00E0617F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +65,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		524FC30B23DC7BF900DF2BF2 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				524FC30923DC7BF200DF2BF2 /* Extensions.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		52873A0623D9CC6E00E0617F = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +94,7 @@
 			children = (
 				52873A1223D9CC6E00E0617F /* AppDelegate.swift */,
 				52873A1423D9CC6E00E0617F /* SceneDelegate.swift */,
+				524FC30B23DC7BF900DF2BF2 /* utils */,
 				52873A2923D9F66700E0617F /* fonts */,
 				529A4E4B23DA046900EE84D6 /* Images */,
 				5297F88C23DB330F0018CFC7 /* Model */,
@@ -118,6 +137,10 @@
 		5297F88D23DB33170018CFC7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				524FC30723DC7B3100DF2BF2 /* CollectionsCell.swift */,
+				524FC31023DCB66100DF2BF2 /* TabController.swift */,
+				524FC30C23DCB43600DF2BF2 /* SwapVC.swift */,
+				524FC30E23DCB47400DF2BF2 /* ExploreVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -217,6 +240,11 @@
 			files = (
 				5297F89523DB6CFF0018CFC7 /* UserProfileVC.swift in Sources */,
 				5297F88F23DB33D50018CFC7 /* SignupVC.swift in Sources */,
+				524FC30F23DCB47400DF2BF2 /* ExploreVC.swift in Sources */,
+				524FC30823DC7B3100DF2BF2 /* CollectionsCell.swift in Sources */,
+				524FC31123DCB66100DF2BF2 /* TabController.swift in Sources */,
+				524FC30D23DCB43600DF2BF2 /* SwapVC.swift in Sources */,
+				524FC30A23DC7BF200DF2BF2 /* Extensions.swift in Sources */,
 				5297F89123DB49410018CFC7 /* MainVC.swift in Sources */,
 				52873A1723D9CC6E00E0617F /* LoginVC.swift in Sources */,
 				52873A1323D9CC6E00E0617F /* AppDelegate.swift in Sources */,
