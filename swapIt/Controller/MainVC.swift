@@ -19,21 +19,21 @@ class MainVC: UIViewController {
     
     let numbeOfItemsInRow = 3
   
-//    lazy var mainSegnment: UISegmentedControl = {
-//        let sc = UISegmentedControl(items: ["My Collections", "Albums"])
-//        sc.translatesAutoresizingMaskIntoConstraints = false
-//        sc.tintColor = .clear
-//        sc.backgroundColor = .clear
-////        sc.removeBorders()
-//        sc.layer.borderWidth = 0
-//        sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
-////        sc.sizeToFit()
-//        sc.selectedSegmentTintColor = UIColor.rgb(red: 235, green: 51, blue: 72)
-//        sc.selectedSegmentIndex = 0
-//        sc.addTarget(self, action: #selector(handleSegnmentDidChange), for: .valueChanged)
-//
-//        return sc
-//    }()
+    lazy var mainSegnment: UISegmentedControl = {
+        let sc = UISegmentedControl(items: ["My Collections", "Albums"])
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.tintColor = .clear
+        sc.backgroundColor = .clear
+//        sc.removeBorders()
+        sc.layer.borderWidth = 0
+        sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+//        sc.sizeToFit()
+        sc.selectedSegmentTintColor = UIColor.rgb(red: 235, green: 51, blue: 72)
+        sc.selectedSegmentIndex = 0
+        sc.addTarget(self, action: #selector(handleSegnmentDidChange), for: .valueChanged)
+
+        return sc
+    }()
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -63,22 +63,23 @@ class MainVC: UIViewController {
     
     @objc fileprivate func handleSegnmentDidChange(sender: UISegmentedControl){
 
-        switch sender.selectedSegmentIndex  {
-        case 0:
-            view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
-            navigationController?.navigationBar.topItem?.title = "My Collections"
-        case 1:
-            view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 20)
-            navigationController?.navigationBar.topItem?.title = "Albums"
-
-//            colorArray.removeAll()
-//            collectionView.reloadData()
-            
-        default:
-            view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
-            navigationController?.navigationBar.topItem?.title = "My Collections"
-
-        }
+//        switch sender.selectedSegmentIndex  {
+//        case 0:
+//            view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
+//            navigationController?.navigationBar.topItem?.title = "My Collections"
+//        case 1:
+//            view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 20)
+//            navigationController?.navigationBar.topItem?.title = "Albums"
+//
+////            colorArray.removeAll()
+////            collectionView.reloadData()
+//
+//        default:
+//            view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
+//            navigationController?.navigationBar.topItem?.title = "My Collections"
+//
+//        }
+        collectionView.reloadData()
 
     }
     
@@ -122,7 +123,7 @@ class MainVC: UIViewController {
 ////        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
 //        toolBar.items = [add]
 //        toolBar.addSubview(mainSegnment)
-//        navigationItem.titleView = mainSegnment
+        navigationItem.titleView = mainSegnment
 
 //        navigationController?.setToolbarHidden(false, animated: false)
 
@@ -195,21 +196,36 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return colorArray.count + 1
+        switch mainSegnment.selectedSegmentIndex {
+        case 0:
+            return colorArray.count
+        case 1:
+            return nameArray.count
+        default:
+            return colorArray.count
+        }
+//        return colorArray.count + 1
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionsCell, for: indexPath) as! CollectionsCell
 
-        if indexPath.item == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: segnmentedCell, for: indexPath) as! SegnmentedCell
-            cell.mainSegnment.addTarget(self, action: #selector(handleSegnmentDidChange), for: .valueChanged)
-            return cell
-        }
-        else{
-            cell.backgroundColor = colorArray[indexPath.item - 1]
-
+//        if indexPath.item == 0 {
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: segnmentedCell, for: indexPath) as! SegnmentedCell
+//            cell.mainSegnment.addTarget(self, action: #selector(handleSegnmentDidChange), for: .valueChanged)
+//            return cell
+//        }
+//        else{
+//            cell.backgroundColor = colorArray[indexPath.item]
+//        }
+        switch mainSegnment.selectedSegmentIndex {
+        case 0:
+            cell.backgroundColor = colorArray[indexPath.item]
+        case 1:
+            cell.lbl.text = nameArray[indexPath.item]
+        default:
+            cell.backgroundColor = colorArray[indexPath.item]
         }
         
         return cell
@@ -223,9 +239,9 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     // MARK: UICollectionViewDelegateFlowLayout functions
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if indexPath.item == 0{
-            return CGSize(width: collectionView.frame.width - 15, height: 50)
-        }
+//        if indexPath.item == 0{
+//            return CGSize(width: collectionView.frame.width - 15, height: 50)
+//        }
         return CGSize(width: (self.collectionView.frame.width/3.0) - 4 , height: (self.collectionView.frame.height/6))
     }
 
