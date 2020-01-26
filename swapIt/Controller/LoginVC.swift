@@ -150,6 +150,9 @@ class LoginVC: UIViewController {
     @objc func loginBtnPressed(){
         let mainVC = MainVC()
         mainVC.modalPresentationStyle = .fullScreen
+//        self.navigationController?.present(mainVC, animated: true, completion: nil)
+//        self.navigationController?.pushViewController(mainVC, animated: true)
+
         self.present(mainVC, animated: true, completion: nil)
     }
     

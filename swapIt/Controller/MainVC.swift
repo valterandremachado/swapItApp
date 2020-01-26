@@ -14,8 +14,12 @@ let segnmentedCell = "segmentedCell"
 
 class MainVC: UIViewController {
     
-    var colorArray = [UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink]
-    var nameArray = ["Valter", "Andre", "Machado", "Valter", "Andre", "Machado"]
+    let colorArray = [UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink]
+    /// album of swappable things
+    let albumArray = ["Album", "Album","Album","Album","Album","Album","Album","Album"]
+    /// collection of swappable things
+    let collectionArray = ["Collection", "Collection","Collection","Collection","Collection","Collection"]
+
     
     let numbeOfItemsInRow = 3
   
@@ -43,17 +47,15 @@ class MainVC: UIViewController {
 //        layout.minimumInteritemSpacing = 10
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.showsHorizontalScrollIndicator = false
+        cv.showsVerticalScrollIndicator = false
         cv.backgroundColor = .orange
         // preferredContentSize = layout.itemSize
         
         /// registering cell
         cv.register(CollectionsCell.self, forCellWithReuseIdentifier: collectionsCell)
-        cv.register(SegnmentedCell.self, forCellWithReuseIdentifier: segnmentedCell)
+//        cv.register(SegnmentedCell.self, forCellWithReuseIdentifier: segnmentedCell)
         return cv
     }()
-
-    let toolBar = UIToolbar()
 
     override func viewDidLoad() {
         view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
@@ -62,23 +64,6 @@ class MainVC: UIViewController {
     }
     
     @objc fileprivate func handleSegnmentDidChange(sender: UISegmentedControl){
-
-//        switch sender.selectedSegmentIndex  {
-//        case 0:
-//            view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
-//            navigationController?.navigationBar.topItem?.title = "My Collections"
-//        case 1:
-//            view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 20)
-//            navigationController?.navigationBar.topItem?.title = "Albums"
-//
-////            colorArray.removeAll()
-////            collectionView.reloadData()
-//
-//        default:
-//            view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
-//            navigationController?.navigationBar.topItem?.title = "My Collections"
-//
-//        }
         collectionView.reloadData()
 
     }
@@ -93,20 +78,21 @@ class MainVC: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         /// navBar  largeTitle color
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.topItem?.largeTitleDisplayMode = .automatic
+        navigationController?.navigationBar.topItem?.largeTitleDisplayMode = .always
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         let profileImage = UIImage.init(named: "millie.jpg")
         /// profileBtn instance
         let profileBtn = UIButton(type: .custom)
+        profileBtn.imageView?.contentMode = .scaleAspectFill
         profileBtn.setImage(profileImage, for: .normal)
         profileBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         profileBtn.layer.cornerRadius = profileBtn.frame.size.height/2
         profileBtn.layer.masksToBounds = false
         profileBtn.clipsToBounds = true
-        profileBtn.layer.borderWidth = 1.5
+//        profileBtn.layer.borderWidth = 1.5
         profileBtn.sizeToFit()
-        profileBtn.layer.borderColor = UIColor.red.cgColor
+//        profileBtn.layer.borderColor = UIColor.red.cgColor
 
         /// height and width constrainnts of profileBtn
         let widthConstraint = profileBtn.widthAnchor.constraint(equalToConstant: 40)
@@ -155,14 +141,14 @@ class MainVC: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-//        mainSegnment.isHidden = true
+//        mainSegnment.isHidden = false
 
 //        scrollVC.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0))
        
 //        mainSegnment.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 15, left: 40, bottom: 0, right: 40))
         
         collectionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: 15, bottom: 0, right: 15))
-        collectionView.layoutIfNeeded()
+//        collectionView.layoutIfNeeded()
     }
     
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -180,31 +166,26 @@ class MainVC: UIViewController {
 //        }
 //    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-//        if let destinationVC = segue.destination as? MainVC {
-//            destinationVC.delegate = self
-//        }
-    }
 }
 
 /// layout extension
 extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     // MARK: UICollectionViewDataSource functions
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 1
+//    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch mainSegnment.selectedSegmentIndex {
         case 0:
-            return colorArray.count
+            return collectionArray.count
         case 1:
-            return nameArray.count
+            return albumArray.count
         default:
-            return colorArray.count
+            break
         }
 //        return colorArray.count + 1
+
         return 0
     }
     
@@ -219,15 +200,22 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 //        else{
 //            cell.backgroundColor = colorArray[indexPath.item]
 //        }
+        
         switch mainSegnment.selectedSegmentIndex {
         case 0:
             cell.backgroundColor = colorArray[indexPath.item]
+            cell.lbl.text = collectionArray[indexPath.item]
+            cell.lbl.textColor = .white
+            navigationController?.navigationBar.topItem?.title = "My Collections"
         case 1:
-            cell.lbl.text = nameArray[indexPath.item]
-        default:
             cell.backgroundColor = colorArray[indexPath.item]
+            cell.lbl.text = albumArray[indexPath.item]
+            cell.lbl.textColor = .white
+            navigationController?.navigationBar.topItem?.title = "Albums"
+        default:
+//            cell.backgroundColor = colorArray[indexPath.item]
+            break
         }
-        
         return cell
     }
 //   func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -250,7 +238,7 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return  6
+        return  5
     }
     
 }

@@ -14,8 +14,8 @@ extension UIImageView {
     self.layer.cornerRadius = self.frame.height / 2
     self.layer.masksToBounds = false
     self.clipsToBounds = true
-    self.layer.borderWidth = 4.0
-    self.layer.borderColor = UIColor.rgb(red: 235, green: 51, blue: 72) as! CGColor
+//    self.layer.borderWidth = 4.0
+//    self.layer.borderColor = UIColor.rgb(red: 235, green: 51, blue: 72) as! CGColor
    // make square(* must to make circle),
    // resize(reduce the kilobyte) and
    // fix rotation.

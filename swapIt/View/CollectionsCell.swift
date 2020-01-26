@@ -15,10 +15,12 @@ class CollectionsCell: UICollectionViewCell {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.textAlignment = .center
+        lb.tintColor = .white
         return lb
     }()
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        setupView()
     }
     
     fileprivate func setupView(){
