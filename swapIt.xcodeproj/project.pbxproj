@@ -27,6 +27,7 @@
 		529A4E4D23DA047500EE84D6 /* balance.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 529A4E4C23DA047500EE84D6 /* balance.jpg */; };
 		529A4E4F23DA0CDE00EE84D6 /* AbstractDark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 529A4E4E23DA0CDE00EE84D6 /* AbstractDark.jpg */; };
 		529A4E5123DA0CE900EE84D6 /* paint.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 529A4E5023DA0CE900EE84D6 /* paint.jpg */; };
+		52B17F2523DD83C3007B5084 /* SegnmentedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B17F2423DD83C3007B5084 /* SegnmentedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		529A4E4C23DA047500EE84D6 /* balance.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = balance.jpg; sourceTree = "<group>"; };
 		529A4E4E23DA0CDE00EE84D6 /* AbstractDark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AbstractDark.jpg; sourceTree = "<group>"; };
 		529A4E5023DA0CE900EE84D6 /* paint.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = paint.jpg; sourceTree = "<group>"; };
+		52B17F2423DD83C3007B5084 /* SegnmentedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegnmentedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				524FC30723DC7B3100DF2BF2 /* CollectionsCell.swift */,
+				52B17F2423DD83C3007B5084 /* SegnmentedCell.swift */,
 				524FC31023DCB66100DF2BF2 /* TabController.swift */,
 				524FC30C23DCB43600DF2BF2 /* SwapVC.swift */,
 				524FC30E23DCB47400DF2BF2 /* ExploreVC.swift */,
@@ -243,6 +246,7 @@
 				524FC30F23DCB47400DF2BF2 /* ExploreVC.swift in Sources */,
 				524FC30823DC7B3100DF2BF2 /* CollectionsCell.swift in Sources */,
 				524FC31123DCB66100DF2BF2 /* TabController.swift in Sources */,
+				52B17F2523DD83C3007B5084 /* SegnmentedCell.swift in Sources */,
 				524FC30D23DCB43600DF2BF2 /* SwapVC.swift in Sources */,
 				524FC30A23DC7BF200DF2BF2 /* Extensions.swift in Sources */,
 				5297F89123DB49410018CFC7 /* MainVC.swift in Sources */,
