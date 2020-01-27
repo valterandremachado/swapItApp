@@ -28,6 +28,8 @@
 		529A4E4F23DA0CDE00EE84D6 /* AbstractDark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 529A4E4E23DA0CDE00EE84D6 /* AbstractDark.jpg */; };
 		529A4E5123DA0CE900EE84D6 /* paint.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 529A4E5023DA0CE900EE84D6 /* paint.jpg */; };
 		52B17F2523DD83C3007B5084 /* SegnmentedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B17F2423DD83C3007B5084 /* SegnmentedCell.swift */; };
+		52D42EC123DEF81C00F0FB6C /* UserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D42EC023DEF81C00F0FB6C /* UserInfoCell.swift */; };
+		52D42EC323DF154600F0FB6C /* EditUserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D42EC223DF154600F0FB6C /* EditUserProfileVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		529A4E4E23DA0CDE00EE84D6 /* AbstractDark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AbstractDark.jpg; sourceTree = "<group>"; };
 		529A4E5023DA0CE900EE84D6 /* paint.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = paint.jpg; sourceTree = "<group>"; };
 		52B17F2423DD83C3007B5084 /* SegnmentedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegnmentedCell.swift; sourceTree = "<group>"; };
+		52D42EC023DEF81C00F0FB6C /* UserInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCell.swift; sourceTree = "<group>"; };
+		52D42EC223DF154600F0FB6C /* EditUserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserProfileVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,7 @@
 				5297F88E23DB33D50018CFC7 /* SignupVC.swift */,
 				5297F89023DB49410018CFC7 /* MainVC.swift */,
 				5297F89423DB6CFF0018CFC7 /* UserProfileVC.swift */,
+				52D42EC223DF154600F0FB6C /* EditUserProfileVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 				524FC31023DCB66100DF2BF2 /* TabController.swift */,
 				524FC30C23DCB43600DF2BF2 /* SwapVC.swift */,
 				524FC30E23DCB47400DF2BF2 /* ExploreVC.swift */,
+				52D42EC023DEF81C00F0FB6C /* UserInfoCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -243,6 +249,7 @@
 			files = (
 				5297F89523DB6CFF0018CFC7 /* UserProfileVC.swift in Sources */,
 				5297F88F23DB33D50018CFC7 /* SignupVC.swift in Sources */,
+				52D42EC123DEF81C00F0FB6C /* UserInfoCell.swift in Sources */,
 				524FC30F23DCB47400DF2BF2 /* ExploreVC.swift in Sources */,
 				524FC30823DC7B3100DF2BF2 /* CollectionsCell.swift in Sources */,
 				524FC31123DCB66100DF2BF2 /* TabController.swift in Sources */,
@@ -251,6 +258,7 @@
 				524FC30A23DC7BF200DF2BF2 /* Extensions.swift in Sources */,
 				5297F89123DB49410018CFC7 /* MainVC.swift in Sources */,
 				52873A1723D9CC6E00E0617F /* LoginVC.swift in Sources */,
+				52D42EC323DF154600F0FB6C /* EditUserProfileVC.swift in Sources */,
 				52873A1323D9CC6E00E0617F /* AppDelegate.swift in Sources */,
 				52873A1523D9CC6E00E0617F /* SceneDelegate.swift in Sources */,
 			);

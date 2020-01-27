@@ -187,7 +187,7 @@ class SignupVC: UIViewController {
     }
     
     @objc func signupBtnPressed(){
-        let mainVC = MainVC()
+        let mainVC = TabController()
         mainVC.modalPresentationStyle = .fullScreen
         self.present(mainVC, animated: true, completion: nil)
     }
@@ -213,7 +213,8 @@ class SignupVC: UIViewController {
             
             loginStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: view.frame.height/3, left: 25, bottom: 0, right: 25))
             
-            labelsStackView.anchor(top: nil, leading: loginStackView.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: loginStackView.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: view.frame.width/6.7, bottom: 0, right: view.frame.width/6.7)
+            labelsStackView.anchor(top: nil, leading: loginStackView.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: loginStackView.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: view.frame.width/6.7, bottom: 10, right: view.frame.width/6.7)
+//                view.frame.width/8.8
             )
             /// separator views:
             SignupBtn.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize.init(width: 0, height: 45))

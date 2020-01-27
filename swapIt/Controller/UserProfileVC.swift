@@ -9,8 +9,16 @@
 import UIKit
 import LBTATools
 
+let userInfoCellID = "userInfoCell"
+
 class UserProfileVC: UIViewController {
     
+    let userInfo:[[String]] = [
+        ["MEET-UP PLACES",       "SM Baguio City, Pines Resto"],
+        ["MEET-UP DAYS",      "Monday to Friday"],
+        ["MEET-UP TIME",        "8 am to 6 m"],
+        ["CONTACT INFO", "+63 222 3383 2795"]
+    ]
     let profileImage = UIImage(named: "millie.jpg")
     let collectionNo = 0
     let swappableNo = 0
@@ -19,7 +27,8 @@ class UserProfileVC: UIViewController {
         let btn = UIButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Done", for: .normal)
-        btn.tintColor = UIColor(displayP3Red: 235/255, green: 51/255, blue: 72/255, alpha: 1)
+        btn.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        btn.tintColor = UIColor.rgb(red: 253, green: 39, blue: 93)
         btn.addTarget(self, action: #selector(doneBtnPressed), for: .touchUpInside)
         return btn
     }()
@@ -28,7 +37,8 @@ class UserProfileVC: UIViewController {
         let btn = UIButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Edit", for: .normal)
-        btn.tintColor = UIColor(displayP3Red: 235/255, green: 51/255, blue: 72/255, alpha: 1)
+        btn.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        btn.tintColor = UIColor.rgb(red: 253, green: 39, blue: 93)
 
         return btn
     }()
@@ -38,7 +48,7 @@ class UserProfileVC: UIViewController {
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.layer.borderWidth = 2
         iv.clipsToBounds = true
-        iv.layer.borderColor = .init(srgbRed: 235/255, green: 51/255, blue: 72/255, alpha: 1)
+        iv.layer.borderColor = .init(srgbRed: 253/255, green: 39/255, blue: 93/255, alpha: 1)
         iv.contentMode = .scaleAspectFill
 //        iv.backgroundColor = .blue
         return iv
@@ -65,7 +75,7 @@ class UserProfileVC: UIViewController {
     lazy var collectionNoLbl: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.textColor = .red
+        lb.textColor = UIColor.rgb(red: 253, green: 39, blue: 93)
         lb.text = "0"
         lb.font = .boldSystemFont(ofSize: 18)
 
@@ -75,7 +85,7 @@ class UserProfileVC: UIViewController {
     lazy var swappableNoLbl: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.textColor = .red
+        lb.textColor = UIColor.rgb(red: 253, green: 39, blue: 93)
         lb.text = "0"
         lb.font = .boldSystemFont(ofSize: 18)
 
@@ -115,6 +125,20 @@ class UserProfileVC: UIViewController {
         return sv
     }()
     
+    lazy var tableView: UITableView = {
+        let tv = UITableView()
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.backgroundColor = .clear
+//        tv.separatorColor = .gray
+//        tv.isScrollEnabled = false
+        tv.isUserInteractionEnabled = false
+        
+        tv.delegate = self
+        tv.dataSource = self
+        tv.register(UserInfoCell.self, forCellReuseIdentifier: userInfoCellID)
+        return tv
+    }()
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -122,6 +146,8 @@ class UserProfileVC: UIViewController {
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
+        self.tableView.tableFooterView = UIView()
+
 //        profileCircleLayer()
         setupView()
     }
@@ -145,13 +171,13 @@ class UserProfileVC: UIViewController {
     }
     
     fileprivate func setupView(){
-        [profileImageView, doneBtn, editBtn, userName, userLocation, upperStackView, lowerStackView].forEach({view.addSubview($0)})
+        [profileImageView, doneBtn, editBtn, userName, userLocation, upperStackView, lowerStackView, tableView].forEach({view.addSubview($0)})
         profileImageView.image = profileImage
         /// view constrainsts
         doneBtn.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets.init(top: 0, left: 15, bottom: 0, right: 0))
         editBtn.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 15))
         
-        profileImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 80, left: view.frame.width/3, bottom: 0, right: view.frame.width/3),size: CGSize.init(width: 0, height: view.frame.size.width/3))
+        profileImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 100, left: view.frame.width/3, bottom: 0, right: view.frame.width/3),size: CGSize.init(width: 0, height: view.frame.size.width/3))
         
         userName.anchor(top: profileImageView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 25, left: 0, bottom: 0, right: 0))
         
@@ -159,7 +185,48 @@ class UserProfileVC: UIViewController {
         /// stackviews constraints
         upperStackView.anchor(top: userName.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 75, left: view.frame.width/4, bottom: 0, right: view.frame.width/4), size: CGSize.init(width: 0, height: 20))
         lowerStackView.anchor(top: upperStackView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 15, left: view.frame.width/8 , bottom: 0, right: view.frame.width/8), size: CGSize.init(width: 0, height: 20))
+        
+        tableView.anchor(top: lowerStackView.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 40, left: 20, bottom: 0, right: 20))
 
     }
+}
+
+extension UserProfileVC: UITableViewDelegate, UITableViewDataSource {
+    
+    override func viewWillAppear(_ animated: Bool) {
+//        tableView.estimatedRowHeight = 200
+//        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return userInfo.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: userInfoCellID, for: indexPath) as! UserInfoCell
+//        cell.meetUpDaysLbl.text = dayLblArray[indexPath.row][0]
+        
+        if cell == nil
+        {
+            cell = UserInfoCell(style: .subtitle, reuseIdentifier: userInfoCellID)
+        }
+        
+        /// give tableView its full separator width
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
+        
+        /// assign title amd subtitle on the tableView
+        cell.infoTitle.text = userInfo[indexPath.row][0]
+        cell.infoDetails.text = userInfo[indexPath.row][1]
+        
+        /// change title and subtitle color
+        cell.infoTitle.textColor = .lightGray
+        cell.infoDetails.textColor = .white
+        
+        return cell
+    }
+    
+    
 }
 

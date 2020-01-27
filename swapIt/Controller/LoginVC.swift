@@ -148,7 +148,7 @@ class LoginVC: UIViewController {
     }
     
     @objc func loginBtnPressed(){
-        let mainVC = MainVC()
+        let mainVC = TabController()
         mainVC.modalPresentationStyle = .fullScreen
 //        self.navigationController?.present(mainVC, animated: true, completion: nil)
 //        self.navigationController?.pushViewController(mainVC, animated: true)
@@ -177,7 +177,8 @@ class LoginVC: UIViewController {
         
         loginStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: view.frame.height/3, left: 25, bottom: 0, right: 25))
         
-        labelsStackView.anchor(top: nil, leading: loginStackView.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: loginStackView.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: view.frame.width/6.4, bottom: 0, right: view.frame.width/6.4)
+        labelsStackView.anchor(top: nil, leading: loginStackView.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: loginStackView.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: view.frame.width/6.5, bottom: 10, right: view.frame.width/6.5)
+//            view.frame.width/8.4
         )
         
 //        imageView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)

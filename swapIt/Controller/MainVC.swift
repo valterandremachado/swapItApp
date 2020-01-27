@@ -49,8 +49,9 @@ class MainVC: UIViewController {
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.showsVerticalScrollIndicator = false
         cv.backgroundColor = .orange
+        cv.dataSource = self
+        cv.delegate = self
         // preferredContentSize = layout.itemSize
-        
         /// registering cell
         cv.register(CollectionsCell.self, forCellWithReuseIdentifier: collectionsCell)
 //        cv.register(SegnmentedCell.self, forCellWithReuseIdentifier: segnmentedCell)
@@ -138,8 +139,6 @@ class MainVC: UIViewController {
         [collectionView].forEach({view.addSubview($0)})
         collectionView.backgroundColor = .clear
 //        view.sendSubviewToBack(collectionView)
-        collectionView.dataSource = self
-        collectionView.delegate = self
         
 //        mainSegnment.isHidden = false
 
