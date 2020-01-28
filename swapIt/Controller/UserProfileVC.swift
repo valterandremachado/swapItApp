@@ -39,7 +39,7 @@ class UserProfileVC: UIViewController {
         btn.setTitle("Edit", for: .normal)
         btn.titleLabel?.font = .boldSystemFont(ofSize: 18)
         btn.tintColor = UIColor.rgb(red: 253, green: 39, blue: 93)
-
+        btn.addTarget(self, action: #selector(editBtnPressed), for: .touchUpInside)
         return btn
     }()
     
@@ -162,6 +162,11 @@ class UserProfileVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @objc fileprivate func editBtnPressed(){
+        let editProfileVC = EditUserProfileVC()
+        present(editProfileVC, animated: true, completion: nil)
+    }
+    
     fileprivate func profileCircleLayer(){
         let circleLayer = CAShapeLayer()
         circleLayer.path = UIBezierPath(ovalIn: CGRect(x: view.frame.width/3 - 8, y: view.frame.width/3.54, width: view.frame.width/3 + 15, height: view.frame.size.width/3 + 15)).cgPath
@@ -177,16 +182,16 @@ class UserProfileVC: UIViewController {
         doneBtn.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets.init(top: 0, left: 15, bottom: 0, right: 0))
         editBtn.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 15))
         
-        profileImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 100, left: view.frame.width/3, bottom: 0, right: view.frame.width/3),size: CGSize.init(width: 0, height: view.frame.size.width/3))
+        profileImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 60, left: view.frame.width/3, bottom: 0, right: view.frame.width/3),size: CGSize.init(width: 0, height: view.frame.size.width/3))
         
         userName.anchor(top: profileImageView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 25, left: 0, bottom: 0, right: 0))
         
         userLocation.anchor(top: userName.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 10, left: 0, bottom: 0, right: 0))
         /// stackviews constraints
-        upperStackView.anchor(top: userName.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 75, left: view.frame.width/4, bottom: 0, right: view.frame.width/4), size: CGSize.init(width: 0, height: 20))
+        upperStackView.anchor(top: userName.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 60, left: view.frame.width/4, bottom: 0, right: view.frame.width/4), size: CGSize.init(width: 0, height: 20))
         lowerStackView.anchor(top: upperStackView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 15, left: view.frame.width/8 , bottom: 0, right: view.frame.width/8), size: CGSize.init(width: 0, height: 20))
         
-        tableView.anchor(top: lowerStackView.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 40, left: 20, bottom: 0, right: 20))
+        tableView.anchor(top: lowerStackView.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 40, left: 20, bottom: 0, right: 20))
 
     }
 }

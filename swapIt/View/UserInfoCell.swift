@@ -43,8 +43,8 @@ class UserInfoCell: UITableViewCell {
         [infoTitle, infoDetails].forEach({contentView.addSubview($0)})
         contentView.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
 
-        infoTitle.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: UIEdgeInsets.init(top: 10, left: 0, bottom: 0, right: 0))
+        infoTitle.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: UIEdgeInsets.init(top: 5, left: 0, bottom: 0, right: 0))
         
-        infoDetails.anchor(top: infoTitle.bottomAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets.init(top: 10, left: 0, bottom: 10, right: 0))
+        infoDetails.anchor(top: infoTitle.bottomAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets.init(top: 5, left: 0, bottom: 5, right: 0))
     }
 }

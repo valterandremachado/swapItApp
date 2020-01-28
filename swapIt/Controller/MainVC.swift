@@ -10,7 +10,7 @@ import UIKit
 import LBTATools
 
 let collectionsCell = "collectionsCell"
-let segnmentedCell = "segmentedCell"
+let segnmentedCellID = "segmentedCell"
 
 class MainVC: UIViewController {
     
@@ -23,25 +23,27 @@ class MainVC: UIViewController {
     
     let numbeOfItemsInRow = 3
   
-    lazy var mainSegnment: UISegmentedControl = {
-        let sc = UISegmentedControl(items: ["My Collections", "Albums"])
-        sc.translatesAutoresizingMaskIntoConstraints = false
-        sc.tintColor = .clear
-        sc.backgroundColor = .clear
-//        sc.removeBorders()
-        sc.layer.borderWidth = 0
-        sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
-//        sc.sizeToFit()
-        sc.selectedSegmentTintColor = UIColor.rgb(red: 235, green: 51, blue: 72)
-        sc.selectedSegmentIndex = 0
-        sc.addTarget(self, action: #selector(handleSegnmentDidChange), for: .valueChanged)
-
-        return sc
-    }()
+//    lazy var mainSegnment: UISegmentedControl = {
+//        let sc = UISegmentedControl(items: ["My Collections", "Albums"])
+//        sc.translatesAutoresizingMaskIntoConstraints = false
+//        sc.tintColor = .clear
+//        sc.backgroundColor = .clear
+////        sc.removeBorders()
+//        sc.layer.borderWidth = 0
+//        sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+////        sc.sizeToFit()
+//        sc.selectedSegmentTintColor = UIColor.rgb(red: 235, green: 51, blue: 72)
+//        sc.selectedSegmentIndex = 0
+//        sc.addTarget(self, action: #selector(handleSegnmentDidChange), for: .valueChanged)
+//
+//        return sc
+//    }()
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        layout.sectionHeadersPinToVisibleBounds = true
+
 //        layout.minimumLineSpacing = 10
 //        layout.
 //        layout.minimumInteritemSpacing = 10
@@ -54,7 +56,7 @@ class MainVC: UIViewController {
         // preferredContentSize = layout.itemSize
         /// registering cell
         cv.register(CollectionsCell.self, forCellWithReuseIdentifier: collectionsCell)
-//        cv.register(SegnmentedCell.self, forCellWithReuseIdentifier: segnmentedCell)
+        cv.register(SegnmentedCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: segnmentedCellID)
         return cv
     }()
 
@@ -72,7 +74,8 @@ class MainVC: UIViewController {
     func setNavigationBar() {
          navigationController?.navigationBar.topItem?.title = "My Collections"
         /// navBar color
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.hideNavBarSeperator()
         /// navBarItem color
         navigationController?.navigationBar.tintColor = UIColor.rgb(red: 235, green: 51, blue: 72)
         /// navBarTitle color
@@ -87,7 +90,7 @@ class MainVC: UIViewController {
         let profileBtn = UIButton(type: .custom)
         profileBtn.imageView?.contentMode = .scaleAspectFill
         profileBtn.setImage(profileImage, for: .normal)
-        profileBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        profileBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         profileBtn.layer.cornerRadius = profileBtn.frame.size.height/2
         profileBtn.layer.masksToBounds = false
         profileBtn.clipsToBounds = true
@@ -96,8 +99,8 @@ class MainVC: UIViewController {
 //        profileBtn.layer.borderColor = UIColor.red.cgColor
 
         /// height and width constrainnts of profileBtn
-        let widthConstraint = profileBtn.widthAnchor.constraint(equalToConstant: 40)
-        let heightConstraint = profileBtn.heightAnchor.constraint(equalToConstant: 40)
+        let widthConstraint = profileBtn.widthAnchor.constraint(equalToConstant: 30)
+        let heightConstraint = profileBtn.heightAnchor.constraint(equalToConstant: 30)
         heightConstraint.isActive = true
         widthConstraint.isActive = true
         profileBtn.addTarget(self, action: #selector(profileImagePressed), for: .touchUpInside)
@@ -110,7 +113,7 @@ class MainVC: UIViewController {
 ////        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
 //        toolBar.items = [add]
 //        toolBar.addSubview(mainSegnment)
-        navigationItem.titleView = mainSegnment
+//        navigationItem.titleView = mainSegnment
 
 //        navigationController?.setToolbarHidden(false, animated: false)
 
@@ -175,46 +178,76 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 //        return 1
 //    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch mainSegnment.selectedSegmentIndex {
-        case 0:
-            return collectionArray.count
-        case 1:
-            return albumArray.count
-        default:
-            break
-        }
-//        return colorArray.count + 1
+//        switch mainSegnment.selectedSegmentIndex {
+//        case 0:
+//            return collectionArray.count
+//        case 1:
+//            return albumArray.count
+//        default:
+//            break
+//        }
+        return colorArray.count
 
-        return 0
+//        return 0
+    }
+    
+     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind:
+        String, at indexPath: IndexPath) -> UICollectionReusableView {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier:
+                segnmentedCellID, for: indexPath) as! SegnmentedCell
+//        switch kind {
+//        case UICollectionView.elementKindSectionHeader:
+//            if indexPath.section == 0 {
+//                //Your Code Here
+//            } else {
+//            }
+//            return header
+//
+//        default:
+//            assert(false, "Unexpected element kind")
+//        }
+        
+            return header
+    }
+    
+//     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        let header = collectionView.dequeueReusableCell(withReuseIdentifier: segnmentedCellID, for: indexPath) as! SegnmentedCell
+//
+//        return header
+//    }
+
+    /// header height
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionsCell, for: indexPath) as! CollectionsCell
-
+//
 //        if indexPath.item == 0 {
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: segnmentedCell, for: indexPath) as! SegnmentedCell
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: segnmentedCellID, for: indexPath) as! SegnmentedCell
 //            cell.mainSegnment.addTarget(self, action: #selector(handleSegnmentDidChange), for: .valueChanged)
 //            return cell
 //        }
 //        else{
-//            cell.backgroundColor = colorArray[indexPath.item]
+            cell.backgroundColor = colorArray[indexPath.item]
 //        }
-        
-        switch mainSegnment.selectedSegmentIndex {
-        case 0:
-            cell.backgroundColor = colorArray[indexPath.item]
-            cell.lbl.text = collectionArray[indexPath.item]
-            cell.lbl.textColor = .white
-            navigationController?.navigationBar.topItem?.title = "My Collections"
-        case 1:
-            cell.backgroundColor = colorArray[indexPath.item]
-            cell.lbl.text = albumArray[indexPath.item]
-            cell.lbl.textColor = .white
-            navigationController?.navigationBar.topItem?.title = "Albums"
-        default:
+//
+//        switch mainSegnment.selectedSegmentIndex {
+//        case 0:
 //            cell.backgroundColor = colorArray[indexPath.item]
-            break
-        }
+//            cell.lbl.text = collectionArray[indexPath.item]
+//            cell.lbl.textColor = .white
+//            navigationController?.navigationBar.topItem?.title = "My Collections"
+//        case 1:
+//            cell.backgroundColor = colorArray[indexPath.item]
+//            cell.lbl.text = albumArray[indexPath.item]
+//            cell.lbl.textColor = .white
+//            navigationController?.navigationBar.topItem?.title = "Albums"
+//        default:
+//            cell.backgroundColor = colorArray[indexPath.item]
+//            break
+//        }
         return cell
     }
 //   func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -240,4 +273,35 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
         return  5
     }
     
+}
+
+extension UINavigationBar {
+
+func hideNavBarSeperator()
+{
+    let img = UIImage()
+    self.shadowImage = img
+    self.setBackgroundImage(img, for: UIBarMetrics.default)
+}
+
+func showNavBarSeperator()
+{
+    let img = UIImage.pixelImageWithColor(color: UIColor.red)//Use Any Color
+    self.shadowImage = img
+}
+}
+extension UIImage {
+class func pixelImageWithColor(color: UIColor) -> UIImage {
+    let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
+    UIGraphicsBeginImageContext(rect.size)
+    let context = UIGraphicsGetCurrentContext()
+
+    context!.setFillColor(color.cgColor)
+    context!.fill(rect)
+
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+
+    return image!
+}
 }

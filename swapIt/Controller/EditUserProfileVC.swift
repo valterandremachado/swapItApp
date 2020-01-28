@@ -9,9 +9,10 @@
 import UIKit
 import LBTATools
 
-class EditUserProfileVC: UIViewController {
+class EditUserProfileVC: UINavigationController {
     
     override func viewDidLoad() {
+        view.backgroundColor = .red
     }
     
 }

@@ -35,7 +35,8 @@ class SegnmentedCell: UICollectionViewCell {
     
     private func setupView(){
         contentView.addSubview(mainSegnment)
-        mainSegnment.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: 40, bottom: 15, right: 40))
+        contentView.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
+        mainSegnment.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets.init(top: 8, left: 40, bottom: 8, right: 40))
     }
     
 //    @objc fileprivate func handleSegnmentDidChange(){
