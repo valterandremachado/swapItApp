@@ -9,39 +9,39 @@
 import UIKit
 import LBTATools
 
-let collectionsCell = "collectionsCell"
+let collectionsCellID = "collectionsCell"
 let segnmentedCellID = "segmentedCell"
 
 class MainVC: UIViewController {
     
     let colorArray = [UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink]
     /// album of swappable things
-    let albumArray = ["Album", "Album","Album","Album","Album","Album","Album","Album"]
+    let albumArray = ["Album", "Album","Album","Album","Album","Album","Album","Album", "Album", "Album","Album","Album","Album","Album","Album","Album", "Album", "Album","Album","Album","Album","Album","Album","Album"]
     /// collection of swappable things
     let collectionArray = ["Collection", "Collection","Collection","Collection","Collection","Collection"]
 
-    
     let numbeOfItemsInRow = 3
   
-//    lazy var mainSegnment: UISegmentedControl = {
-//        let sc = UISegmentedControl(items: ["My Collections", "Albums"])
-//        sc.translatesAutoresizingMaskIntoConstraints = false
-//        sc.tintColor = .clear
-//        sc.backgroundColor = .clear
-////        sc.removeBorders()
-//        sc.layer.borderWidth = 0
-//        sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
-////        sc.sizeToFit()
-//        sc.selectedSegmentTintColor = UIColor.rgb(red: 235, green: 51, blue: 72)
-//        sc.selectedSegmentIndex = 0
-//        sc.addTarget(self, action: #selector(handleSegnmentDidChange), for: .valueChanged)
-//
-//        return sc
-//    }()
+    lazy var mainSegnment: UISegmentedControl = {
+        let sc = UISegmentedControl(items: ["Collections", "Albums"])
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.tintColor = .clear
+        sc.backgroundColor = .clear
+//        sc.removeBorders()
+        sc.layer.borderWidth = 0
+        sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+//        sc.sizeToFit()
+        sc.selectedSegmentTintColor = UIColor.rgb(red: 235, green: 51, blue: 72)
+        sc.selectedSegmentIndex = 0
+        sc.addTarget(self, action: #selector(handleSegnmentDidChange), for: .valueChanged)
+
+        return sc
+    }()
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        /// makes the header stick on top
         layout.sectionHeadersPinToVisibleBounds = true
 
 //        layout.minimumLineSpacing = 10
@@ -55,21 +55,20 @@ class MainVC: UIViewController {
         cv.delegate = self
         // preferredContentSize = layout.itemSize
         /// registering cell
-        cv.register(CollectionsCell.self, forCellWithReuseIdentifier: collectionsCell)
+        cv.register(CollectionsCell.self, forCellWithReuseIdentifier: collectionsCellID)
         cv.register(SegnmentedCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: segnmentedCellID)
         return cv
     }()
-
+    
+    let itemsToDisplay = 0
+    
     override func viewDidLoad() {
         view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
         setNavigationBar()
         setupCollectionView()
     }
     
-    @objc fileprivate func handleSegnmentDidChange(sender: UISegmentedControl){
-        collectionView.reloadData()
-
-    }
+    
     
     func setNavigationBar() {
          navigationController?.navigationBar.topItem?.title = "My Collections"
@@ -135,39 +134,17 @@ class MainVC: UIViewController {
   
     @objc func profileImagePressed(){
         let userProfileVC = UserProfileVC()
+        userProfileVC.modalPresentationStyle = .fullScreen
         self.present(userProfileVC, animated: true)
     }
     
     func setupCollectionView(){
         [collectionView].forEach({view.addSubview($0)})
         collectionView.backgroundColor = .clear
-//        view.sendSubviewToBack(collectionView)
-        
-//        mainSegnment.isHidden = false
-
-//        scrollVC.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0))
-       
-//        mainSegnment.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 15, left: 40, bottom: 0, right: 40))
         
         collectionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: 15, bottom: 0, right: 15))
 //        collectionView.layoutIfNeeded()
     }
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if scrollView.panGestureRecognizer.translation(in: self.view).y < 0 {
-//            self.mainSegnment.isHidden = false
-//            navigationController?.navigationBar.prefersLargeTitles = false
-//            view.updateConstraintsIfNeeded()
-////             collectionView.anchor(top: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 15, left: 15, bottom: 0, right: 15))
-//
-//        } else {
-//        self.mainSegnment.isHidden = true
-//            navigationController?.navigationBar.prefersLargeTitles = true
-//            view.updateConstraintsIfNeeded()
-
-//        }
-//    }
-    
 }
 
 /// layout extension
@@ -178,83 +155,65 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 //        return 1
 //    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        switch mainSegnment.selectedSegmentIndex {
-//        case 0:
-//            return collectionArray.count
-//        case 1:
-//            return albumArray.count
-//        default:
-//            break
-//        }
-        return colorArray.count
-
-//        return 0
-    }
-    
-     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind:
-        String, at indexPath: IndexPath) -> UICollectionReusableView {
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier:
-                segnmentedCellID, for: indexPath) as! SegnmentedCell
-//        switch kind {
-//        case UICollectionView.elementKindSectionHeader:
-//            if indexPath.section == 0 {
-//                //Your Code Here
-//            } else {
-//            }
-//            return header
-//
-//        default:
-//            assert(false, "Unexpected element kind")
-//        }
         
-            return header
-    }
-    
-//     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        let header = collectionView.dequeueReusableCell(withReuseIdentifier: segnmentedCellID, for: indexPath) as! SegnmentedCell
-//
-//        return header
-//    }
+        switch mainSegnment.selectedSegmentIndex {
+        case 0:
+            return collectionArray.count
+        case 1:
+            return albumArray.count
+        default:
+            break
+        }
 
-    /// header height
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 50)
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionsCell, for: indexPath) as! CollectionsCell
-//
-//        if indexPath.item == 0 {
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: segnmentedCellID, for: indexPath) as! SegnmentedCell
-//            cell.mainSegnment.addTarget(self, action: #selector(handleSegnmentDidChange), for: .valueChanged)
-//            return cell
-//        }
-//        else{
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionsCellID, for: indexPath) as! CollectionsCell
+    
+        switch mainSegnment.selectedSegmentIndex {
+        case 0:
             cell.backgroundColor = colorArray[indexPath.item]
-//        }
-//
-//        switch mainSegnment.selectedSegmentIndex {
-//        case 0:
-//            cell.backgroundColor = colorArray[indexPath.item]
-//            cell.lbl.text = collectionArray[indexPath.item]
-//            cell.lbl.textColor = .white
-//            navigationController?.navigationBar.topItem?.title = "My Collections"
-//        case 1:
-//            cell.backgroundColor = colorArray[indexPath.item]
-//            cell.lbl.text = albumArray[indexPath.item]
-//            cell.lbl.textColor = .white
-//            navigationController?.navigationBar.topItem?.title = "Albums"
-//        default:
-//            cell.backgroundColor = colorArray[indexPath.item]
-//            break
-//        }
+            cell.lbl.text = collectionArray[indexPath.item]
+            cell.lbl.textColor = .white
+            navigationController?.navigationBar.topItem?.title = "My Collections"
+        case 1:
+            cell.backgroundColor = colorArray[indexPath.item]
+            cell.lbl.text = albumArray[indexPath.item]
+            cell.lbl.textColor = .white
+            navigationController?.navigationBar.topItem?.title = "Albums"
+        default:
+            cell.backgroundColor = colorArray[indexPath.item]
+            break
+        }
         return cell
     }
-//   func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        UIView.animate(withDuration: 0.5, animations: {
-//            self.navigationController?.navigationBar.prefersLargeTitles = (velocity.y < 0)
-//        })
-//    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind:
+            String, at indexPath: IndexPath) -> UICollectionReusableView {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier:
+                    segnmentedCellID, for: indexPath) as! SegnmentedCell
+        
+        /// added mainSegnment to segnmentedCell (header) subview in other to keep track of the segnment switch right from the MainVC
+        header.addSubview(mainSegnment)
+        header.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
+
+        mainSegnment.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: UIEdgeInsets.init(top: 20, left: 40, bottom: 15, right: 40))
+        
+            return header
+        }
+    
+    @objc fileprivate func handleSegnmentDidChange(sender: UISegmentedControl){
+        /// reload collectionView data when the user switches between segnment
+        collectionView.reloadData()
+
+    }
+        
+
+        /// header height
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 65)
+    }
     
     // MARK: UICollectionViewDelegateFlowLayout functions
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

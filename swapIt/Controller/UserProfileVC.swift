@@ -26,7 +26,10 @@ class UserProfileVC: UIViewController {
     lazy var doneBtn: UIButton = {
         let btn = UIButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("Done", for: .normal)
+//        btn.setTitle("Done", for: .normal)
+//        let largeConfig = UIImage.SymbolConfiguration(textStyle: .largeTitle)
+//        btn.stPreferredSymbolConfiguration(largeConfig, forImageIn: .normal)
+        btn.setImage(UIImage(systemName: "chevron.left.circle.fill"), for: .normal)
         btn.titleLabel?.font = .boldSystemFont(ofSize: 18)
         btn.tintColor = UIColor.rgb(red: 253, green: 39, blue: 93)
         btn.addTarget(self, action: #selector(doneBtnPressed), for: .touchUpInside)
@@ -36,7 +39,8 @@ class UserProfileVC: UIViewController {
     lazy var editBtn: UIButton = {
         let btn = UIButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("Edit", for: .normal)
+//        btn.setTitle("Edit", for: .normal)
+        btn.setImage(UIImage(systemName: "gear"), for: .normal)
         btn.titleLabel?.font = .boldSystemFont(ofSize: 18)
         btn.tintColor = UIColor.rgb(red: 253, green: 39, blue: 93)
         btn.addTarget(self, action: #selector(editBtnPressed), for: .touchUpInside)
@@ -164,7 +168,38 @@ class UserProfileVC: UIViewController {
     
     @objc fileprivate func editBtnPressed(){
         let editProfileVC = EditUserProfileVC()
-        present(editProfileVC, animated: true, completion: nil)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let logout = UIAlertAction(title: "Log out", style: .destructive) { (action) in
+            print("log out")
+        }
+        
+//        cancel.setValue(UIColor(displayP3Red: 22/255, green: 23/255, blue: 27/255, alpha: 1.5), forKey: "view.tintColor")
+        /// alert backgroundColor
+        alertController.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor(displayP3Red: 22/255, green: 23/255, blue: 27/255, alpha: 1.5)
+//        cancel.setValue(UIColor.red, forKey: "tintColor")
+
+        /// alet textColor
+        alertController.view.tintColor = UIColor(displayP3Red: 253/255, green: 39/255, blue: 93/255, alpha: 1)
+
+        let editProfile = UIAlertAction(title: "Edit Profile", style: .default) { (action) in
+            print("edit profile")
+            self.present(editProfileVC, animated: true, completion: nil)
+        }
+        let accSettings = UIAlertAction(title: "Settings", style: .default) { (action) in
+            print("Settings")
+        }
+        let aboutSwapIt = UIAlertAction(title: "About SwapIt", style: .default) { (action) in
+            print("About SwapIt")
+        }
+        
+        alertController.addAction(editProfile)
+        alertController.addAction(accSettings)
+        alertController.addAction(aboutSwapIt)
+        alertController.addAction(logout)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     fileprivate func profileCircleLayer(){
@@ -186,7 +221,7 @@ class UserProfileVC: UIViewController {
         
         userName.anchor(top: profileImageView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 25, left: 0, bottom: 0, right: 0))
         
-        userLocation.anchor(top: userName.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 10, left: 0, bottom: 0, right: 0))
+        userLocation.anchor(top: userName.bottomAnchor, leading: view.leadingAnchor, bottom: upperStackView.topAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 10, left: 0, bottom: 0, right: 0))
         /// stackviews constraints
         upperStackView.anchor(top: userName.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 60, left: view.frame.width/4, bottom: 0, right: view.frame.width/4), size: CGSize.init(width: 0, height: 20))
         lowerStackView.anchor(top: upperStackView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 15, left: view.frame.width/8 , bottom: 0, right: view.frame.width/8), size: CGSize.init(width: 0, height: 20))
