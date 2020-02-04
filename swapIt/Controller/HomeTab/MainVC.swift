@@ -13,10 +13,27 @@ let collectionsCellID = "collectionsCell"
 let segnmentedCellID = "segmentedCell"
 
 class MainVC: UIViewController {
-    
+    let itemImage = UIImage.init(named: "millie.jpg")
+    let userInfo:[[String]] = [
+           ["MEET-UP PLACES",       "SM Baguio City, Pines Resto"],
+           ["MEET-UP DAYS",      "Monday to Friday"],
+           ["MEET-UP TIME",        "8 am to 6 m"],
+           ["CONTACT INFO", "+63 222 3383 2795"]
+       ]
     let colorArray = [UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink]
     /// album of swappable things
-    let albumArray = ["Album", "Album","Album","Album","Album","Album","Album","Album", "Album", "Album","Album","Album","Album","Album","Album","Album", "Album", "Album","Album","Album","Album","Album","Album","Album"]
+    let albumArray = [["My Collections", "123"],
+                      ["Shoes", "12"],
+                      ["Smartphones", "23"],
+                      ["Toys", "111"],
+                      ["Computers", "50"],
+                      ["Tablets", "43"],
+                      ["Shoes", "12"],
+                    ["Smartphones", "23"],
+                    ["Toys", "111"],
+                    ["Computers", "50"],
+                    ["Tablets", "43"]
+    ]
     /// collection of swappable things
     let collectionArray = ["Collection", "Collection","Collection","Collection","Collection","Collection"]
 
@@ -119,7 +136,7 @@ class MainVC: UIViewController {
 //        toolBar.tintColor = .red
         
         /// add addBtn  to UIBarButtonItem on the right side
-        let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: nil, action: #selector(addBtnPressed))
+        let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(addBtnPressed))
         navigationItem.rightBarButtonItem = addItem
 //        mainSegnment.frame(forAlignmentRect: CGRect(x: 0, y: -50, width: 44, height: 44))
 //        let sc = UIBarButtonItem(customView: mainSegnment)
@@ -130,6 +147,19 @@ class MainVC: UIViewController {
     
     @objc func addBtnPressed() {
 
+        switch mainSegnment.selectedSegmentIndex {
+        case 0:
+            let addCollection = AddCollectionVC()
+            
+            self.navigationController?.pushViewController(addCollection, animated: true)
+//            present(addCollection, animated: true)
+            print("collection")
+        case 1:
+            print("album")
+            addAlbumAndCollection()
+        default:
+            print("collection")
+        }
     }
   
     @objc func profileImagePressed(){
@@ -138,11 +168,52 @@ class MainVC: UIViewController {
         self.present(userProfileVC, animated: true)
     }
     
+    fileprivate func addAlbumAndCollection(){
+        
+        let alertController = UIAlertController(title: "New Album", message: "Enter a name for this album.", preferredStyle: .alert)
+//        alertController.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor(displayP3Red: 22/255, green: 23/255, blue: 27/255, alpha: 1.5)
+//        alertController.view.tintColor = UIColor(displayP3Red: 253/255, green: 39/255, blue: 93/255, alpha: 1)
+        
+//        let attributedTitle = NSAttributedString(string: alertController.title!, attributes: [
+//           NSAttributedString.Key.foregroundColor : UIColor.white
+//        ])
+//
+//        let attributedMessage = NSAttributedString(string: alertController.message!, attributes: [
+////            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15), //your font here
+//            NSAttributedString.Key.foregroundColor : UIColor.white
+//        ])
+//
+//        alertController.setValue(attributedTitle, forKey: "attributedTitle")
+//        alertController.setValue(attributedMessage, forKey: "attributedMessage")
+
+
+        let saveAction = UIAlertAction(title: "Add", style: .default) { [unowned self] action in
+
+        }
+                   
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+
+        alertController.addTextField { (addTextField) in
+        addTextField.placeholder = "Title"
+        var txtFld = UITextField()
+
+        txtFld = addTextField
+//            addTextField.backgroundColor = .red
+//            addTextField.layer.borderColor = .init(srgbRed: 235/255, green: 52/255, blue: 52/255, alpha: 1)
+            addTextField.layoutSubviews()
+//            txtFld.backgroundColor = .red
+//            txtFld.layoutSubviews()
+        }
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+    }
+       
     func setupCollectionView(){
         [collectionView].forEach({view.addSubview($0)})
         collectionView.backgroundColor = .clear
         
-        collectionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: 15, bottom: 0, right: 15))
+        collectionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets.init(top: 0, left: 15, bottom: 0, right: 15))
 //        collectionView.layoutIfNeeded()
     }
 }
@@ -174,16 +245,36 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
         switch mainSegnment.selectedSegmentIndex {
         case 0:
             cell.backgroundColor = colorArray[indexPath.item]
-            cell.lbl.text = collectionArray[indexPath.item]
-            cell.lbl.textColor = .white
+            cell.backgroundColor = .clear
+            cell.titleLbl.text = collectionArray[indexPath.item]
+//            cell.lbl.textColor = .white
+            cell.titleLbl.isHidden = true
+            cell.counterLbl.isHidden = true
+
+//            cell.imageView.anchor(top: cell.topAnchor, leading: cell.leadingAnchor, bottom: cell.bottomAnchor, trailing: cell.trailingAnchor)
+            cell.imageView.image = itemImage
+
+            cell.updateConstraints()
             navigationController?.navigationBar.topItem?.title = "My Collections"
         case 1:
-            cell.backgroundColor = colorArray[indexPath.item]
-            cell.lbl.text = albumArray[indexPath.item]
-            cell.lbl.textColor = .white
+            cell.titleLbl.isHidden = false
+            cell.counterLbl.isHidden = false
+
+//            cell.backgroundColor = colorArray[indexPath.item]
+            cell.backgroundColor = .clear
+            cell.titleLbl.text = albumArray[indexPath.item][0]
+            cell.counterLbl.text = albumArray[indexPath.item][1]
+            
+            cell.titleLbl.textColor = .white
+            cell.titleLbl.font = .boldSystemFont(ofSize: 18)
+
+            cell.counterLbl.textColor = .lightGray
+            cell.imageView.image = itemImage
             navigationController?.navigationBar.topItem?.title = "Albums"
         default:
-            cell.backgroundColor = colorArray[indexPath.item]
+            cell.titleLbl.isHidden = true
+//            cell.backgroundColor = .clear
+//            cell.backgroundColor = colorArray[indexPath.item]
             break
         }
         return cell
@@ -198,7 +289,7 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
         header.addSubview(mainSegnment)
         header.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
 
-        mainSegnment.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: UIEdgeInsets.init(top: 20, left: 40, bottom: 15, right: 40))
+        mainSegnment.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: UIEdgeInsets.init(top: 10, left: 40, bottom: 15, right: 40))
         
             return header
         }
@@ -212,7 +303,7 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 
         /// header height
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 65)
+        return CGSize(width: view.frame.width, height: 55)
     }
     
     // MARK: UICollectionViewDelegateFlowLayout functions
@@ -221,46 +312,80 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 //        if indexPath.item == 0{
 //            return CGSize(width: collectionView.frame.width - 15, height: 50)
 //        }
-        return CGSize(width: (self.collectionView.frame.width/3.0) - 4 , height: (self.collectionView.frame.height/6))
+        /// changing number of cell in row when user switches through the segnment
+        var noOfCellsInRow = 0
+        switch mainSegnment.selectedSegmentIndex {
+        case 0:
+            noOfCellsInRow = 3
+        case 1:
+            noOfCellsInRow = 2
+        default:
+            break
+        }
+        
+        /// changing sizeForItem when user switches through the segnment
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        let totalSpace = flowLayout.sectionInset.left
+            + flowLayout.sectionInset.right
+            + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
+
+        let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
+        switch mainSegnment.selectedSegmentIndex {
+            case 0:
+                return CGSize(width: size, height: size + 50)
+            case 1:
+                return CGSize(width: size, height: size + 50)
+            default:
+                break
+            }
+        return CGSize(width: 0, height: 0)
+//        return CGSize(width: (self.collectionView.frame.width/3.0) - 4 , height: (self.collectionView.frame.height/6))
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return  5
+        
+        switch mainSegnment.selectedSegmentIndex {
+        case 0:
+            return  -40
+        case 1:
+            return  20
+        default:
+            break
+        }
+        
+        return  0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return  5
+        switch mainSegnment.selectedSegmentIndex {
+        case 0:
+            return  10
+        case 1:
+            return  10
+        default:
+            break
+        }
+        
+        return  0
     }
     
 }
 
-extension UINavigationBar {
 
-func hideNavBarSeperator()
-{
-    let img = UIImage()
-    self.shadowImage = img
-    self.setBackgroundImage(img, for: UIBarMetrics.default)
-}
-
-func showNavBarSeperator()
-{
-    let img = UIImage.pixelImageWithColor(color: UIColor.red)//Use Any Color
-    self.shadowImage = img
-}
-}
-extension UIImage {
-class func pixelImageWithColor(color: UIColor) -> UIImage {
-    let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
-    UIGraphicsBeginImageContext(rect.size)
-    let context = UIGraphicsGetCurrentContext()
-
-    context!.setFillColor(color.cgColor)
-    context!.fill(rect)
-
-    let image = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-
-    return image!
-}
+import SwiftUI
+///config  PreviewProvider
+struct MainPreview: PreviewProvider {
+    static var previews: some View {
+        ContainerView().edgesIgnoringSafeArea(.all)
+    }
+    struct ContainerView: UIViewControllerRepresentable {
+        
+        func makeUIViewController(context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) -> UIViewController {
+            return TabController()
+        }
+        
+        func updateUIViewController(_ uiViewController: MainPreview.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) {
+            
+        }
+    }
 }

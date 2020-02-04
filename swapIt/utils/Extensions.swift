@@ -76,62 +76,33 @@ func setTitle(title:String, subtitle:String) -> UIView {
     return titleView
 }
 
-import UIKit
+extension UINavigationBar {
 
-class HomeController: UIViewController {
+func hideNavBarSeperator()
+{
+    let img = UIImage()
+    self.shadowImage = img
+    self.setBackgroundImage(img, for: UIBarMetrics.default)
+}
 
-    var currentViewController:UIViewController?
+func showNavBarSeperator()
+{
+    let img = UIImage.pixelImageWithColor(color: UIColor.red)//Use Any Color
+    self.shadowImage = img
+}
+}
+extension UIImage {
+class func pixelImageWithColor(color: UIColor) -> UIImage {
+    let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
+    UIGraphicsBeginImageContext(rect.size)
+    let context = UIGraphicsGetCurrentContext()
 
-     var homeController: UIView!
+    context!.setFillColor(color.cgColor)
+    context!.fill(rect)
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
 
-        let initialController:UIViewController = self.viewControllerForSegmentedIndex(index: 0)
-
-        self.addChild(initialController)
-
-        initialController.view.frame = self.homeController.bounds
-        self.homeController.addSubview(initialController.view)
-        self.currentViewController = initialController
-
-    }
-
-    func segmentChanged(sender: UISegmentedControl) {
-
-        let viewCOntroller:UIViewController = viewControllerForSegmentedIndex(index: sender.selectedSegmentIndex)
-
-        self.addChild(viewCOntroller)
-
-        self.transition(from: self.currentViewController!, to: viewCOntroller, duration: 0.5, options: UIView.AnimationOptions.transitionFlipFromBottom, animations: {
-            self.currentViewController?.view.removeFromSuperview()
-            viewCOntroller.view.frame = self.homeController.bounds
-            self.homeController.addSubview(viewCOntroller.view)
-
-            }, completion:{ finished in
-
-                viewCOntroller.didMove(toParent: self)
-                self.currentViewController?.removeFromParent()
-                self.currentViewController = viewCOntroller
-
-        })
-
-    }
-    func viewControllerForSegmentedIndex(index:Int) -> UIViewController {
-        var viewController:UIViewController?
-        switch index {
-        case 0:
-            viewController = self.storyboard?.instantiateViewController(withIdentifier: "StoryboardIdForFirstController")
-            break
-        case 1:
-            viewController = self.storyboard?.instantiateViewController(withIdentifier: "StoryboardIdForSecondController")
-            break
-        case 2:
-            viewController = self.storyboard?.instantiateViewController(withIdentifier: "StoryboardIdForThirdController")
-            break
-        default:
-            break
-        }
-        return viewController!
-    }
+    return image!
+}
 }

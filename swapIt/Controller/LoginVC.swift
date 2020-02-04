@@ -8,7 +8,7 @@
 
 import UIKit
 import LBTATools
-
+import SwiftUI
 
 class LoginVC: UIViewController {
     
@@ -184,15 +184,33 @@ class LoginVC: UIViewController {
 //        imageView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
 
         loginBtn.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize.init(width: 0, height: 45))
-        separatorOne.anchor(top: emailTxtFld.bottomAnchor, leading: loginStackView.leadingAnchor, bottom: nil, trailing: loginStackView.trailingAnchor, size: CGSize.init(width: 0, height: 1))
+        separatorOne.anchor(top: emailTxtFld.bottomAnchor, leading: loginStackView.leadingAnchor, bottom: nil, trailing: loginStackView.trailingAnchor, size: CGSize.init(width: 0, height: 0.5))
         
-        separatorTwo.anchor(top: passwordTxtFld.bottomAnchor, leading: loginStackView.leadingAnchor, bottom: nil, trailing: loginStackView.trailingAnchor, size: CGSize.init(width: 0, height: 1))
+        separatorTwo.anchor(top: passwordTxtFld.bottomAnchor, leading: loginStackView.leadingAnchor, bottom: nil, trailing: loginStackView.trailingAnchor, size: CGSize.init(width: 0, height: 0.5))
 //
 //         passwordTxtFld.anchor(top: emailTxtFld.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
 //
 //         loginBtn.anchor(top: passwordTxtFld.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
         
     }
+    
+    
+    ///config  PreviewProvider
+       struct MainPreview: PreviewProvider {
+           static var previews: some View {
+               ContainerView().edgesIgnoringSafeArea(.all)
+           }
+           struct ContainerView: UIViewControllerRepresentable {
+               
+               func makeUIViewController(context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) -> UIViewController {
+                   return LoginVC()
+               }
+               
+               func updateUIViewController(_ uiViewController: MainPreview.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) {
+                   
+               }
+           }
+       }
 
 
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class TabController: UITabBarController {
     let homeVC = MainVC()
@@ -30,4 +31,24 @@ class TabController: UITabBarController {
         recentVC.tabBarItem.image = UIImage(systemName: imageName)
         return recentVC
     }
+    
+    
+    
+
+    ///config  PreviewProvider
+       struct MainPreview: PreviewProvider {
+           static var previews: some View {
+               ContainerView().edgesIgnoringSafeArea(.all)
+           }
+           struct ContainerView: UIViewControllerRepresentable {
+               
+               func makeUIViewController(context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) -> UIViewController {
+                   return TabController()
+               }
+               
+               func updateUIViewController(_ uiViewController: MainPreview.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) {
+                   
+               }
+           }
+       }
 }

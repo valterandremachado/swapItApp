@@ -8,6 +8,7 @@
 
 import UIKit
 import LBTATools
+import SwiftUI
 
 class SignupVC: UIViewController {
     let imageBackground = UIImage(named: "balance.jpg")
@@ -172,6 +173,7 @@ class SignupVC: UIViewController {
             super.viewDidLoad()
             // Do any additional setup after loading the view.
             self.isModalInPresentation = true
+
             setupView()
             assignbackground()
     //        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "balance.jpg")!)
@@ -218,13 +220,33 @@ class SignupVC: UIViewController {
             )
             /// separator views:
             SignupBtn.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize.init(width: 0, height: 45))
-            separatorOne.anchor(top: emailTxtFld.bottomAnchor, leading: loginStackView.leadingAnchor, bottom: nil, trailing: loginStackView.trailingAnchor, size: CGSize.init(width: 0, height: 1))
+            separatorOne.anchor(top: emailTxtFld.bottomAnchor, leading: loginStackView.leadingAnchor, bottom: nil, trailing: loginStackView.trailingAnchor, size: CGSize.init(width: 0, height: 0.5))
             
-            separatorTwo.anchor(top: passwordTxtFld.bottomAnchor, leading: loginStackView.leadingAnchor, bottom: nil, trailing: loginStackView.trailingAnchor, size: CGSize.init(width: 0, height: 1))
+            separatorTwo.anchor(top: passwordTxtFld.bottomAnchor, leading: loginStackView.leadingAnchor, bottom: nil, trailing: loginStackView.trailingAnchor, size: CGSize.init(width: 0, height: 0.5))
             
-            separatorThree.anchor(top: confirmPwTxtFld.bottomAnchor, leading: loginStackView.leadingAnchor, bottom: nil, trailing: loginStackView.trailingAnchor, size: CGSize.init(width: 0, height: 1))
+            separatorThree.anchor(top: confirmPwTxtFld.bottomAnchor, leading: loginStackView.leadingAnchor, bottom: nil, trailing: loginStackView.trailingAnchor, size: CGSize.init(width: 0, height: 0.5))
             
             closeViewBtn.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets.init(top: 5, left: 0, bottom: 0, right: 5))
             
         }
+    
+    
+    
+    
+    ///config  PreviewProvider
+       struct MainPreview: PreviewProvider {
+           static var previews: some View {
+               ContainerView().edgesIgnoringSafeArea(.all)
+           }
+           struct ContainerView: UIViewControllerRepresentable {
+               
+               func makeUIViewController(context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) -> UIViewController {
+                   return SignupVC()
+               }
+               
+               func updateUIViewController(_ uiViewController: MainPreview.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) {
+                   
+               }
+           }
+       }
 }

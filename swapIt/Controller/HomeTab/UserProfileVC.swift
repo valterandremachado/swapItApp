@@ -8,6 +8,7 @@
 
 import UIKit
 import LBTATools
+import SwiftUI
 
 let userInfoCellID = "userInfoCell"
 
@@ -167,41 +168,47 @@ class UserProfileVC: UIViewController {
     }
     
     @objc fileprivate func editBtnPressed(){
-        let editProfileVC = EditUserProfileVC()
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let logout = UIAlertAction(title: "Log out", style: .destructive) { (action) in
-            print("log out")
-        }
-        
-//        cancel.setValue(UIColor(displayP3Red: 22/255, green: 23/255, blue: 27/255, alpha: 1.5), forKey: "view.tintColor")
-        /// alert backgroundColor
-        alertController.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor(displayP3Red: 22/255, green: 23/255, blue: 27/255, alpha: 1.5)
-//        cancel.setValue(UIColor.red, forKey: "tintColor")
-
-        /// alet textColor
-        alertController.view.tintColor = UIColor(displayP3Red: 253/255, green: 39/255, blue: 93/255, alpha: 1)
-
-        let editProfile = UIAlertAction(title: "Edit Profile", style: .default) { (action) in
-            print("edit profile")
-            self.present(editProfileVC, animated: true, completion: nil)
-        }
-        let accSettings = UIAlertAction(title: "Settings", style: .default) { (action) in
-            print("Settings")
-        }
-        let aboutSwapIt = UIAlertAction(title: "About SwapIt", style: .default) { (action) in
-            print("About SwapIt")
-        }
-        
-        alertController.addAction(editProfile)
-        alertController.addAction(accSettings)
-        alertController.addAction(aboutSwapIt)
-        alertController.addAction(logout)
-        alertController.addAction(cancel)
-        
-        self.present(alertController, animated: true, completion: nil)
+       settings()
     }
     
+    fileprivate func settings(){
+                let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                let logout = UIAlertAction(title: "Log out", style: .destructive) { (action) in
+                    print("log out")
+                }
+        //        let cancelVC = UIViewController()
+        //        cancelVC.view.backgroundColor = .black
+        //        cancel.setValue(UIColor(displayP3Red: 22/255, green: 23/255, blue: 27/255, alpha: 1.5), forKey: "view.tintColor")
+                /// alert backgroundColor
+//                alertController.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor(displayP3Red: 22/255, green: 23/255, blue: 27/255, alpha: 1.5)
+        //        cancel.setValue(cancelVC, forKey: "contentViewController")
+                
+                /// alet textColor
+        alertController.view.tintColor = UIColor(displayP3Red: 253/255, green: 39/255, blue: 93/255, alpha: 1.5)
+
+                let editProfile = UIAlertAction(title: "Edit Profile", style: .default) { (action) in
+                    print("edit profile")
+                    let editProfileVC = EditUserProfileVC()
+                    self.present(editProfileVC, animated: true, completion: nil)
+                }
+                let accSettings = UIAlertAction(title: "Settings", style: .default) { (action) in
+                    print("Settings")
+                }
+                let aboutSwapIt = UIAlertAction(title: "About SwapIt", style: .default) { (action) in
+                    print("About SwapIt")
+                }
+                
+                alertController.addAction(editProfile)
+                alertController.addAction(accSettings)
+                alertController.addAction(aboutSwapIt)
+                alertController.addAction(logout)
+                alertController.addAction(cancel)
+                
+                self.present(alertController, animated: true, completion: nil)
+    }
+    
+   
     fileprivate func profileCircleLayer(){
         let circleLayer = CAShapeLayer()
         circleLayer.path = UIBezierPath(ovalIn: CGRect(x: view.frame.width/3 - 8, y: view.frame.width/3.54, width: view.frame.width/3 + 15, height: view.frame.size.width/3 + 15)).cgPath
@@ -267,6 +274,24 @@ extension UserProfileVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    
+
+    ///config  PreviewProvider
+       struct MainPreview: PreviewProvider {
+           static var previews: some View {
+               ContainerView().edgesIgnoringSafeArea(.all)
+           }
+           struct ContainerView: UIViewControllerRepresentable {
+               
+               func makeUIViewController(context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) -> UIViewController {
+                   return UserProfileVC()
+               }
+               
+               func updateUIViewController(_ uiViewController: MainPreview.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) {
+                   
+               }
+           }
+       }
     
 }
 
