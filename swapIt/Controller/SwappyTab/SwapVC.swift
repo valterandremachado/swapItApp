@@ -9,6 +9,8 @@
 import UIKit
 import LBTATools
 
+let imageOne = UIImage(named: "lebron17.jpeg")
+let imageTwo = UIImage(named: "harden4.jpeg")
 class SwapVC: UIViewController {
     
     let colorArray = [UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink]
@@ -19,7 +21,7 @@ class SwapVC: UIViewController {
 
         let linedupArray = ["Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up", "Lined Up"]
       
-        lazy var mainSegnmentTwo: UISegmentedControl = {
+        lazy var mainSegmentTwo: UISegmentedControl = {
             let sc = UISegmentedControl(items: ["Swappables", "Offers", "Lined Up"])
             sc.translatesAutoresizingMaskIntoConstraints = false
             sc.tintColor = .clear
@@ -29,7 +31,7 @@ class SwapVC: UIViewController {
             sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
     //        sc.sizeToFit()
             sc.selectedSegmentTintColor = UIColor.rgb(red: 235, green: 51, blue: 72)
-            sc.selectedSegmentIndex = 0
+            sc.selectedSegmentIndex = 1
             sc.addTarget(self, action: #selector(handleSegnmentDidChange), for: .valueChanged)
 
             return sc
@@ -53,7 +55,7 @@ class SwapVC: UIViewController {
             // preferredContentSize = layout.itemSize
             /// registering cell
             cv.register(SwappyCell.self, forCellWithReuseIdentifier: collectionsCellID)
-            cv.register(SegnmentedCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: segnmentedCellID)
+            cv.register(SegmentedCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: segmentedCellID)
             return cv
         }()
     let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: nil, action: nil)
@@ -161,7 +163,7 @@ extension SwapVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 //    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        switch mainSegnmentTwo.selectedSegmentIndex {
+        switch mainSegmentTwo.selectedSegmentIndex {
         case 0:
             return swappableArray.count
         case 1:
@@ -178,23 +180,39 @@ extension SwapVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionsCellID, for: indexPath) as! SwappyCell
     
-        switch mainSegnmentTwo.selectedSegmentIndex {
+        switch mainSegmentTwo.selectedSegmentIndex {
         case 0:
             cell.backgroundColor = colorArray[indexPath.item]
-            cell.lbl.text = swappableArray[indexPath.item]
-            cell.lbl.textColor = .white
+//            cell.lbl.text = swappableArray[indexPath.item]
+//            cell.lbl.textColor = .white
             navigationController?.navigationBar.topItem?.title = "Swappables"
             navigationItem.rightBarButtonItem = addItem
         case 1:
             cell.backgroundColor = colorArray[indexPath.item]
-            cell.lbl.text = offerArray[indexPath.item]
-            cell.lbl.textColor = .white
+//            cell.lbl.text = offerArray[indexPath.item]
+//            cell.lbl.textColor = .white
+            cell.profileImageView.image = imageOne
+            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width / 2
+//            cell.profileImageView.layoutSubviews()
+
+//            cell.profileImageView.layer.masksToBounds = true
+            cell.profileImageView.clipsToBounds = true
+
+//            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
+            cell.userNameLbl.text = "Millie Bobby"
+            cell.wantsToSwapLbl.text = "wants to swap with your item"
+            cell.wantsToSwapLbl.sizeToFit()
+            cell.wantsToSwapLbl.layoutIfNeeded()
+            
+            cell.imageOneImageView.image = imageOne
+            cell.imageTwoImageView.image = imageTwo
+
             navigationController?.navigationBar.topItem?.title = "Offers"
             navigationItem.rightBarButtonItem = nil
         case 2:
             cell.backgroundColor = colorArray[indexPath.item]
-            cell.lbl.text = linedupArray[indexPath.item]
-            cell.lbl.textColor = .white
+//            cell.lbl.text = linedupArray[indexPath.item]
+//            cell.lbl.textColor = .white
             navigationController?.navigationBar.topItem?.title = "Lined Up"
             navigationItem.rightBarButtonItem = nil
         default:
@@ -208,13 +226,13 @@ extension SwapVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind:
             String, at indexPath: IndexPath) -> UICollectionReusableView {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier:
-                    segnmentedCellID, for: indexPath) as! SegnmentedCell
+                    segmentedCellID, for: indexPath) as! SegmentedCell
         
         /// added mainSegnment to segnmentedCell (header) subview in other to keep track of the segnment switch right from the MainVC
-        header.addSubview(mainSegnmentTwo)
+        header.addSubview(mainSegmentTwo)
         header.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
 
-        mainSegnmentTwo.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: UIEdgeInsets.init(top: 20, left: 40, bottom: 15, right: 40))
+        mainSegmentTwo.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: UIEdgeInsets.init(top: 20, left: 40, bottom: 15, right: 40))
         
             return header
         }
@@ -240,7 +258,7 @@ extension SwapVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
         
         /// changing number of cell in row when user switches through the segnment
         var noOfCellsInRow = 0
-        switch mainSegnmentTwo.selectedSegmentIndex {
+        switch mainSegmentTwo.selectedSegmentIndex {
         case 0:
             noOfCellsInRow = 3
         case 1:
@@ -258,7 +276,7 @@ extension SwapVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
             + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
 
         let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
-        switch mainSegnmentTwo.selectedSegmentIndex {
+        switch mainSegmentTwo.selectedSegmentIndex {
             case 0:
                 return CGSize(width: size, height: size)
             case 1:
@@ -273,7 +291,7 @@ extension SwapVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        switch mainSegnmentTwo.selectedSegmentIndex {
+        switch mainSegmentTwo.selectedSegmentIndex {
                 case 0:
                     return  10
                 case 1:
@@ -287,7 +305,7 @@ extension SwapVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        switch mainSegnmentTwo.selectedSegmentIndex {
+        switch mainSegmentTwo.selectedSegmentIndex {
             case 0:
                 return  10
             case 1:

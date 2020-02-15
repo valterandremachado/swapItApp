@@ -106,3 +106,58 @@ class func pixelImageWithColor(color: UIColor) -> UIImage {
     return image!
 }
 }
+extension UIView {
+  func addDashedBorder() {
+    let color = UIColor.lightGray.cgColor
+
+    let shapeLayer:CAShapeLayer = CAShapeLayer()
+    let frameSize = self.frame.size
+    let shapeRect = CGRect(x: 0, y: 0, width: frameSize.width, height: frameSize.height)
+
+    shapeLayer.bounds = shapeRect
+    shapeLayer.position = CGPoint(x: frameSize.width/2, y: frameSize.height/2)
+    shapeLayer.fillColor = UIColor.clear.cgColor
+    shapeLayer.strokeColor = color
+    shapeLayer.lineWidth = 3
+    shapeLayer.lineJoin = CAShapeLayerLineJoin.round
+    shapeLayer.lineDashPattern = [6,3]
+    shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 5).cgPath
+//    self.layer.masksToBounds = true
+    self.layer.addSublayer(shapeLayer)
+    }
+
+}
+
+extension UIStackView {
+    func addBackground(color: UIColor) {
+        let subView = UIView(frame: bounds)
+        subView.backgroundColor = color
+        subView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        insertSubview(subView, at: 0)
+    }
+}
+
+extension UIImage {
+
+    func imageResize (sizeChange:CGSize)-> UIImage{
+
+        let hasAlpha = true
+        let scale: CGFloat = 0.0 // Use scale factor of main screen
+
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        self.draw(in: CGRect(origin: CGPoint.zero, size: sizeChange))
+
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        return scaledImage!
+    }
+
+}
+
+extension UIImageView {
+
+   func setRounded() {
+    let radius = self.frame.width / 2
+      self.layer.cornerRadius = radius
+      self.layer.masksToBounds = true
+   }
+}

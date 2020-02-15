@@ -9,7 +9,7 @@
 import UIKit
 import LBTATools
 
-class SegnmentedCell: UICollectionViewCell {
+class SegmentedCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: .zero)

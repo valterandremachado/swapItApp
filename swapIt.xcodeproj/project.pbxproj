@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5227C4C923EAFD90002EB382 /* AddCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227C4C823EAFD90002EB382 /* AddCollectionCell.swift */; };
 		524FC30823DC7B3100DF2BF2 /* CollectionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524FC30723DC7B3100DF2BF2 /* CollectionsCell.swift */; };
 		524FC30A23DC7BF200DF2BF2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524FC30923DC7BF200DF2BF2 /* Extensions.swift */; };
 		524FC30D23DCB43600DF2BF2 /* SwapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524FC30C23DCB43600DF2BF2 /* SwapVC.swift */; };
@@ -27,15 +28,19 @@
 		529A4E4D23DA047500EE84D6 /* balance.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 529A4E4C23DA047500EE84D6 /* balance.jpg */; };
 		529A4E4F23DA0CDE00EE84D6 /* AbstractDark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 529A4E4E23DA0CDE00EE84D6 /* AbstractDark.jpg */; };
 		529A4E5123DA0CE900EE84D6 /* paint.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 529A4E5023DA0CE900EE84D6 /* paint.jpg */; };
-		52B17F2523DD83C3007B5084 /* SegnmentedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B17F2423DD83C3007B5084 /* SegnmentedCell.swift */; };
+		52A9807523ED85B600C8D0F9 /* ImagePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A9807423ED85B600C8D0F9 /* ImagePostCell.swift */; };
+		52B17F2523DD83C3007B5084 /* SegmentedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B17F2423DD83C3007B5084 /* SegmentedCell.swift */; };
 		52B1A2BD23E674D700C1C0F5 /* AddCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A2BC23E674D700C1C0F5 /* AddCollectionVC.swift */; };
 		52B1A2C423E6847E00C1C0F5 /* SwappyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A2C323E6847E00C1C0F5 /* SwappyCell.swift */; };
 		52B1A2C723E6875B00C1C0F5 /* ExploreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A2C623E6875B00C1C0F5 /* ExploreCell.swift */; };
 		52D42EC123DEF81C00F0FB6C /* UserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D42EC023DEF81C00F0FB6C /* UserInfoCell.swift */; };
 		52D42EC323DF154600F0FB6C /* EditUserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D42EC223DF154600F0FB6C /* EditUserProfileVC.swift */; };
+		52E3251023F84DA400E668DC /* lebron17.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 52E3250E23F84DA400E668DC /* lebron17.jpeg */; };
+		52E3251123F84DA400E668DC /* harden4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 52E3250F23F84DA400E668DC /* harden4.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5227C4C823EAFD90002EB382 /* AddCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionCell.swift; sourceTree = "<group>"; };
 		524FC30723DC7B3100DF2BF2 /* CollectionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsCell.swift; sourceTree = "<group>"; };
 		524FC30923DC7BF200DF2BF2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		524FC30C23DCB43600DF2BF2 /* SwapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapVC.swift; sourceTree = "<group>"; };
@@ -57,12 +62,15 @@
 		529A4E4C23DA047500EE84D6 /* balance.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = balance.jpg; sourceTree = "<group>"; };
 		529A4E4E23DA0CDE00EE84D6 /* AbstractDark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AbstractDark.jpg; sourceTree = "<group>"; };
 		529A4E5023DA0CE900EE84D6 /* paint.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = paint.jpg; sourceTree = "<group>"; };
-		52B17F2423DD83C3007B5084 /* SegnmentedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegnmentedCell.swift; sourceTree = "<group>"; };
+		52A9807423ED85B600C8D0F9 /* ImagePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePostCell.swift; sourceTree = "<group>"; };
+		52B17F2423DD83C3007B5084 /* SegmentedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedCell.swift; sourceTree = "<group>"; };
 		52B1A2BC23E674D700C1C0F5 /* AddCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionVC.swift; sourceTree = "<group>"; };
 		52B1A2C323E6847E00C1C0F5 /* SwappyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwappyCell.swift; sourceTree = "<group>"; };
 		52B1A2C623E6875B00C1C0F5 /* ExploreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCell.swift; sourceTree = "<group>"; };
 		52D42EC023DEF81C00F0FB6C /* UserInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCell.swift; sourceTree = "<group>"; };
 		52D42EC223DF154600F0FB6C /* EditUserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserProfileVC.swift; sourceTree = "<group>"; };
+		52E3250E23F84DA400E668DC /* lebron17.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lebron17.jpeg; sourceTree = "<group>"; };
+		52E3250F23F84DA400E668DC /* harden4.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = harden4.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +85,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5227C4C723EAF8CA002EB382 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				524FC30723DC7B3100DF2BF2 /* CollectionsCell.swift */,
+				52B17F2423DD83C3007B5084 /* SegmentedCell.swift */,
+				52D42EC023DEF81C00F0FB6C /* UserInfoCell.swift */,
+				5227C4C823EAFD90002EB382 /* AddCollectionCell.swift */,
+				52A9807423ED85B600C8D0F9 /* ImagePostCell.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
 		524FC30B23DC7BF900DF2BF2 /* utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,11 +171,9 @@
 		5297F88D23DB33170018CFC7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5227C4C723EAF8CA002EB382 /* HomeView */,
 				52B1A2C523E6873100C1C0F5 /* ExploreView */,
 				52B1A2C223E6841100C1C0F5 /* SwappyView */,
-				524FC30723DC7B3100DF2BF2 /* CollectionsCell.swift */,
-				52B17F2423DD83C3007B5084 /* SegnmentedCell.swift */,
-				52D42EC023DEF81C00F0FB6C /* UserInfoCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -167,6 +185,8 @@
 				529A4E4E23DA0CDE00EE84D6 /* AbstractDark.jpg */,
 				529A4E5023DA0CE900EE84D6 /* paint.jpg */,
 				529A4E4C23DA047500EE84D6 /* balance.jpg */,
+				52E3250F23F84DA400E668DC /* harden4.jpeg */,
+				52E3250E23F84DA400E668DC /* lebron17.jpeg */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -280,6 +300,8 @@
 			files = (
 				5297F89323DB694A0018CFC7 /* millie.jpg in Resources */,
 				529A4E4F23DA0CDE00EE84D6 /* AbstractDark.jpg in Resources */,
+				52E3251123F84DA400E668DC /* harden4.jpeg in Resources */,
+				52E3251023F84DA400E668DC /* lebron17.jpeg in Resources */,
 				529A4E5123DA0CE900EE84D6 /* paint.jpg in Resources */,
 				529A4E4A23D9FBAC00EE84D6 /* BunchBlossomsPersonalUse-0nA4.ttf in Resources */,
 				529A4E4823D9FB9E00EE84D6 /* Billabong.ttf in Resources */,
@@ -299,12 +321,14 @@
 				5297F89523DB6CFF0018CFC7 /* UserProfileVC.swift in Sources */,
 				5297F88F23DB33D50018CFC7 /* SignupVC.swift in Sources */,
 				52D42EC123DEF81C00F0FB6C /* UserInfoCell.swift in Sources */,
+				52A9807523ED85B600C8D0F9 /* ImagePostCell.swift in Sources */,
 				524FC30F23DCB47400DF2BF2 /* ExploreVC.swift in Sources */,
 				524FC30823DC7B3100DF2BF2 /* CollectionsCell.swift in Sources */,
 				524FC31123DCB66100DF2BF2 /* TabController.swift in Sources */,
 				52B1A2BD23E674D700C1C0F5 /* AddCollectionVC.swift in Sources */,
+				5227C4C923EAFD90002EB382 /* AddCollectionCell.swift in Sources */,
 				52B1A2C723E6875B00C1C0F5 /* ExploreCell.swift in Sources */,
-				52B17F2523DD83C3007B5084 /* SegnmentedCell.swift in Sources */,
+				52B17F2523DD83C3007B5084 /* SegmentedCell.swift in Sources */,
 				524FC30D23DCB43600DF2BF2 /* SwapVC.swift in Sources */,
 				52B1A2C423E6847E00C1C0F5 /* SwappyCell.swift in Sources */,
 				524FC30A23DC7BF200DF2BF2 /* Extensions.swift in Sources */,

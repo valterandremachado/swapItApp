@@ -22,7 +22,7 @@ class ExploreVC: UIViewController {
 
             let nearMeArray = ["Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me", "Near Me"]
           
-            lazy var mainSegnmentThree: UISegmentedControl = {
+            lazy var mainSegmentThree: UISegmentedControl = {
                 let sc = UISegmentedControl(items: ["Popular", "Recent", "Near Me"])
                 sc.translatesAutoresizingMaskIntoConstraints = false
                 sc.tintColor = .clear
@@ -63,7 +63,7 @@ class ExploreVC: UIViewController {
                 // preferredContentSize = layout.itemSize
                 /// registering cell
                 cv.register(ExploreCell.self, forCellWithReuseIdentifier: collectionsCellID)
-                cv.register(SegnmentedCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: segnmentedCellID)
+                cv.register(SegmentedCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: segmentedCellID)
                 return cv
             }()
 
@@ -163,7 +163,7 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
     //    }
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             
-            switch mainSegnmentThree.selectedSegmentIndex {
+            switch mainSegmentThree.selectedSegmentIndex {
             case 0:
                 return popularArray.count
             case 1:
@@ -180,7 +180,7 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionsCellID, for: indexPath) as! ExploreCell
         
-            switch mainSegnmentThree.selectedSegmentIndex {
+            switch mainSegmentThree.selectedSegmentIndex {
             case 0:
                 cell.backgroundColor = colorArray[indexPath.item]
                 cell.lbl.text = popularArray[indexPath.item]
@@ -206,13 +206,13 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
         func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind:
                 String, at indexPath: IndexPath) -> UICollectionReusableView {
                 let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier:
-                        segnmentedCellID, for: indexPath) as! SegnmentedCell
+                        segmentedCellID, for: indexPath) as! SegmentedCell
             
             /// added mainSegnment to segnmentedCell (header) subview in other to keep track of the segnment switch right from the MainVC
-            header.addSubview(mainSegnmentThree)
+            header.addSubview(mainSegmentThree)
             header.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
 
-            mainSegnmentThree.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: UIEdgeInsets.init(top: 20, left: 40, bottom: 15, right: 40))
+            mainSegmentThree.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: UIEdgeInsets.init(top: 20, left: 40, bottom: 15, right: 40))
             
                 return header
             }
@@ -237,7 +237,7 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
     //        }
             /// changing number of cell in row when user switches through the segnment
             var noOfCellsInRow = 0
-            switch mainSegnmentThree.selectedSegmentIndex {
+            switch mainSegmentThree.selectedSegmentIndex {
             case 0:
 //                if indexPath.section == 0 {
 //                    noOfCellsInRow = 2
@@ -258,7 +258,7 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
                 + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
 
             let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
-            switch mainSegnmentThree.selectedSegmentIndex {
+            switch mainSegmentThree.selectedSegmentIndex {
                 case 0:
                     if indexPath.item == 1 {
                         return CGSize(width: size + size + 10, height: size)
@@ -277,7 +277,7 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     
-            switch mainSegnmentThree.selectedSegmentIndex {
+            switch mainSegmentThree.selectedSegmentIndex {
                 case 0:
                     return  10
                 case 1:
@@ -292,7 +292,7 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
         }
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-            switch mainSegnmentThree.selectedSegmentIndex {
+            switch mainSegmentThree.selectedSegmentIndex {
                 case 0:
                     return  10
                 case 1:

@@ -10,7 +10,7 @@ import UIKit
 import LBTATools
 
 let collectionsCellID = "collectionsCell"
-let segnmentedCellID = "segmentedCell"
+let segmentedCellID = "segmentedCell"
 
 class MainVC: UIViewController {
     let itemImage = UIImage.init(named: "millie.jpg")
@@ -39,7 +39,7 @@ class MainVC: UIViewController {
 
     let numbeOfItemsInRow = 3
   
-    lazy var mainSegnment: UISegmentedControl = {
+    lazy var mainSegment: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Collections", "Albums"])
         sc.translatesAutoresizingMaskIntoConstraints = false
         sc.tintColor = .clear
@@ -73,11 +73,10 @@ class MainVC: UIViewController {
         // preferredContentSize = layout.itemSize
         /// registering cell
         cv.register(CollectionsCell.self, forCellWithReuseIdentifier: collectionsCellID)
-        cv.register(SegnmentedCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: segnmentedCellID)
+        cv.register(SegmentedCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: segmentedCellID)
         return cv
     }()
     
-    let itemsToDisplay = 0
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
@@ -147,7 +146,7 @@ class MainVC: UIViewController {
     
     @objc func addBtnPressed() {
 
-        switch mainSegnment.selectedSegmentIndex {
+        switch mainSegment.selectedSegmentIndex {
         case 0:
             let addCollection = AddCollectionVC()
             
@@ -227,7 +226,7 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 //    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        switch mainSegnment.selectedSegmentIndex {
+        switch mainSegment.selectedSegmentIndex {
         case 0:
             return collectionArray.count
         case 1:
@@ -242,7 +241,7 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionsCellID, for: indexPath) as! CollectionsCell
     
-        switch mainSegnment.selectedSegmentIndex {
+        switch mainSegment.selectedSegmentIndex {
         case 0:
             cell.backgroundColor = colorArray[indexPath.item]
             cell.backgroundColor = .clear
@@ -283,13 +282,13 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind:
             String, at indexPath: IndexPath) -> UICollectionReusableView {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier:
-                    segnmentedCellID, for: indexPath) as! SegnmentedCell
+                    segmentedCellID, for: indexPath) as! SegmentedCell
         
         /// added mainSegnment to segnmentedCell (header) subview in other to keep track of the segnment switch right from the MainVC
-        header.addSubview(mainSegnment)
+        header.addSubview(mainSegment)
         header.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
 
-        mainSegnment.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: UIEdgeInsets.init(top: 10, left: 40, bottom: 15, right: 40))
+        mainSegment.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: UIEdgeInsets.init(top: 10, left: 40, bottom: 15, right: 40))
         
             return header
         }
@@ -314,7 +313,7 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 //        }
         /// changing number of cell in row when user switches through the segnment
         var noOfCellsInRow = 0
-        switch mainSegnment.selectedSegmentIndex {
+        switch mainSegment.selectedSegmentIndex {
         case 0:
             noOfCellsInRow = 3
         case 1:
@@ -330,7 +329,7 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
             + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
 
         let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
-        switch mainSegnment.selectedSegmentIndex {
+        switch mainSegment.selectedSegmentIndex {
             case 0:
                 return CGSize(width: size, height: size + 50)
             case 1:
@@ -344,7 +343,7 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        switch mainSegnment.selectedSegmentIndex {
+        switch mainSegment.selectedSegmentIndex {
         case 0:
             return  -40
         case 1:
@@ -357,7 +356,7 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        switch mainSegnment.selectedSegmentIndex {
+        switch mainSegment.selectedSegmentIndex {
         case 0:
             return  10
         case 1:
