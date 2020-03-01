@@ -1,8 +1,8 @@
 //
-//  AddCollectionVC.swift
+//  AddPostVC.swift
 //  swapIt
 //
-//  Created by Valter Andre Machado on 2/2/20.
+//  Created by Valter Andre Machado on 2/23/20.
 //  Copyright © 2020 Valter Andre Machado. All rights reserved.
 //
 
@@ -11,13 +11,12 @@ import LBTATools
 import SwiftUI
 
 
-
-let addCollectionCellID = "addCollectionID"
+let postTVMainCellID = "postTVMainCell"
 let headeID = "headerId"
-let postImageCellID = "postImageID"
+let postCVCellID = "postCVCell"
 let defautImage = UIImage(systemName: "plus.circle.fill")
 
-class AddCollectionVC: UIViewController{
+class AddPostVC: UIViewController {
     
 //    let items = [
 //        ["PRODUCT NAME", "DESCRIPTION"],
@@ -40,7 +39,7 @@ class AddCollectionVC: UIViewController{
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.delegate = self
         tv.dataSource = self
-        tv.register(AddCollectionCell.self, forCellReuseIdentifier: addCollectionCellID)
+        tv.register(PostTVMainCell.self, forCellReuseIdentifier: postTVMainCellID)
         return tv
     }()
     
@@ -61,7 +60,7 @@ class AddCollectionVC: UIViewController{
             cv.delegate = self
             // preferredContentSize = layout.itemSize
             /// registering cell
-            cv.register(ImagePostCell.self, forCellWithReuseIdentifier: postImageCellID)
+            cv.register(PostCVCell.self, forCellWithReuseIdentifier: postCVCellID)
 
             return cv
         }()
@@ -110,7 +109,7 @@ class AddCollectionVC: UIViewController{
         struct ContainerView: UIViewControllerRepresentable {
             
             func makeUIViewController(context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) -> UIViewController {
-                return AddCollectionVC()
+                return AddPostVC()
             }
             
             func updateUIViewController(_ uiViewController: MainPreview.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) {
@@ -120,14 +119,14 @@ class AddCollectionVC: UIViewController{
     }
 }
 
-extension AddCollectionVC: UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
+extension AddPostVC: UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: postImageCellID, for: indexPath) as! ImagePostCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: postCVCellID, for: indexPath) as! PostCVCell
         cell.addDashedBorder()
 //        cell.backgroundColor = .red
         if indexPath.item == 0
@@ -214,12 +213,13 @@ extension AddCollectionVC: UITableViewDelegate, UITableViewDataSource, UICollect
         return height
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: addCollectionCellID, for: indexPath) as! AddCollectionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: postTVMainCellID, for: indexPath) as! PostTVMainCell
 
 //        let item = items[indexPath.row]
 //        let item = indexPath.section == 0 ? items[indexPath.row] : itemsTwo[indexPath.row]
         if indexPath.section == 0 {
             cell.addSubview(collectionView)
+            collectionView.isScrollEnabled = false
             collectionView.backgroundColor = UIColor.rgb(red: 22, green: 23, blue: 27)
 
             
@@ -269,6 +269,7 @@ extension AddCollectionVC: UITableViewDelegate, UITableViewDataSource, UICollect
     //        myView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: view.frame.height/1.2, left: view.frame.width/5, bottom: view.frame.height/5, right: view.frame.width/5))
         }
 }
+
 
 
 

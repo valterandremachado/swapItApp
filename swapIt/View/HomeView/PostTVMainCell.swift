@@ -9,7 +9,7 @@
 import UIKit
 import LBTATools
 
-class AddCollectionCell: UITableViewCell {
+class PostTVMainCell: UITableViewCell {
     
     lazy var titleLbl: UILabel = {
           let lb = UILabel()

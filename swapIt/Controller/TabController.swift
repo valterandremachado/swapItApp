@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 
 class TabController: UITabBarController {
+    
     let homeVC = MainVC()
     let swapVC = SwapVC()
     let exploreVC = ExploreVC()

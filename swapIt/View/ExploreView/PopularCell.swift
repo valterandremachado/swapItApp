@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import LBTATools
 
-class ExploreCell: UICollectionViewCell {
+class PopularCell: UICollectionViewCell {
     lazy var lbl: UILabel = {
            let lb = UILabel()
            lb.translatesAutoresizingMaskIntoConstraints = false

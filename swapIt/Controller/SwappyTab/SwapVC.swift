@@ -11,6 +11,11 @@ import LBTATools
 
 let imageOne = UIImage(named: "lebron17.jpeg")
 let imageTwo = UIImage(named: "harden4.jpeg")
+
+let swappablesCellID = "swapCell"
+let offersCellID = "offersCell"
+let linedUpCellID = "linedUpCell"
+
 class SwapVC: UIViewController {
     
     let colorArray = [UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink, UIColor.blue, UIColor.green, UIColor.blue, UIColor.gray, UIColor.yellow, UIColor.black, UIColor.black, UIColor.systemPink]
@@ -31,7 +36,7 @@ class SwapVC: UIViewController {
             sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
     //        sc.sizeToFit()
             sc.selectedSegmentTintColor = UIColor.rgb(red: 235, green: 51, blue: 72)
-            sc.selectedSegmentIndex = 1
+            sc.selectedSegmentIndex = 2
             sc.addTarget(self, action: #selector(handleSegnmentDidChange), for: .valueChanged)
 
             return sc
@@ -54,7 +59,10 @@ class SwapVC: UIViewController {
             cv.delegate = self
             // preferredContentSize = layout.itemSize
             /// registering cell
-            cv.register(SwappyCell.self, forCellWithReuseIdentifier: collectionsCellID)
+            cv.register(OffersCell.self, forCellWithReuseIdentifier: offersCellID)
+            cv.register(SwappablesCell.self, forCellWithReuseIdentifier: swappablesCellID)
+            cv.register(LinedUpCell.self, forCellWithReuseIdentifier: linedUpCellID)
+            
             cv.register(SegmentedCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: segmentedCellID)
             return cv
         }()
@@ -66,6 +74,7 @@ class SwapVC: UIViewController {
         setNavigationBar()
         setupCollectionView()
     }
+    
     
     func setNavigationBar() {
             navigationController?.navigationBar.topItem?.title = "Swappy"
@@ -178,51 +187,56 @@ extension SwapVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionsCellID, for: indexPath) as! SwappyCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: swappablesCellID, for: indexPath) as! SwappablesCell
     
         switch mainSegmentTwo.selectedSegmentIndex {
         case 0:
+            
             cell.backgroundColor = colorArray[indexPath.item]
 //            cell.lbl.text = swappableArray[indexPath.item]
 //            cell.lbl.textColor = .white
             navigationController?.navigationBar.topItem?.title = "Swappables"
             navigationItem.rightBarButtonItem = addItem
+
+
         case 1:
-            cell.backgroundColor = colorArray[indexPath.item]
+            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: offersCellID, for: indexPath) as! OffersCell
+//            cell.backgroundColor = colorArray[indexPath.item]
 //            cell.lbl.text = offerArray[indexPath.item]
 //            cell.lbl.textColor = .white
-            cell.profileImageView.image = imageOne
-            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.width / 2
-//            cell.profileImageView.layoutSubviews()
-
-//            cell.profileImageView.layer.masksToBounds = true
-            cell.profileImageView.clipsToBounds = true
-
-//            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
-            cell.userNameLbl.text = "Millie Bobby"
-            cell.wantsToSwapLbl.text = "wants to swap with your item"
-            cell.wantsToSwapLbl.sizeToFit()
-            cell.wantsToSwapLbl.layoutIfNeeded()
-            
-            cell.imageOneImageView.image = imageOne
-            cell.imageTwoImageView.image = imageTwo
+            cell2.profileImageView.image = imageOne
+            cell2.userNameLbl.text = "Millie Bobby"
+            cell2.wantsToSwapLbl.text = "wants to swap with your item"
+            cell2.imageOneImageView.image = imageOne
+            cell2.imageTwoImageView.image = imageTwo
+            cell2.separatorView.backgroundColor = .darkGray
 
             navigationController?.navigationBar.topItem?.title = "Offers"
             navigationItem.rightBarButtonItem = nil
+            return cell2
         case 2:
-            cell.backgroundColor = colorArray[indexPath.item]
+            let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: linedUpCellID, for: indexPath) as! LinedUpCell
+            cell3.backgroundColor = colorArray[indexPath.item]
 //            cell.lbl.text = linedupArray[indexPath.item]
 //            cell.lbl.textColor = .white
+            cell3.imageOneImageView.image = imageOne
+            cell3.imageTwoImageView.image = imageTwo
+            cell3.containerView.backgroundColor = .darkGray
+//            cell3.stackView.addBackground(color: .red)
             navigationController?.navigationBar.topItem?.title = "Lined Up"
+
             navigationItem.rightBarButtonItem = nil
+            
+            return cell3
+
         default:
             navigationItem.rightBarButtonItem = addItem
-            cell.backgroundColor = colorArray[indexPath.item]
+//            cell.backgroundColor = colorArray[indexPath.item]
             break
         }
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind:
             String, at indexPath: IndexPath) -> UICollectionReusableView {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier:
@@ -280,9 +294,9 @@ extension SwapVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
             case 0:
                 return CGSize(width: size, height: size)
             case 1:
-                return CGSize(width: size, height: size - 100)
+                return CGSize(width: size, height: size - 160)
             case 2:
-                return CGSize(width: size, height: size - 200)
+                return CGSize(width: size, height: size - 260)
             default:
                 break
             }

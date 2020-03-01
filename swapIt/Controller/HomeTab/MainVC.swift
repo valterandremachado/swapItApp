@@ -9,11 +9,14 @@
 import UIKit
 import LBTATools
 
-let collectionsCellID = "collectionsCell"
+let collectionCellID = "collectionCell"
+let albumCellID = "albumCell"
 let segmentedCellID = "segmentedCell"
 
 class MainVC: UIViewController {
+    
     let itemImage = UIImage.init(named: "millie.jpg")
+    
     let userInfo:[[String]] = [
            ["MEET-UP PLACES",       "SM Baguio City, Pines Resto"],
            ["MEET-UP DAYS",      "Monday to Friday"],
@@ -36,8 +39,6 @@ class MainVC: UIViewController {
     ]
     /// collection of swappable things
     let collectionArray = ["Collection", "Collection","Collection","Collection","Collection","Collection"]
-
-    let numbeOfItemsInRow = 3
   
     lazy var mainSegment: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Collections", "Albums"])
@@ -72,7 +73,9 @@ class MainVC: UIViewController {
         cv.delegate = self
         // preferredContentSize = layout.itemSize
         /// registering cell
-        cv.register(CollectionsCell.self, forCellWithReuseIdentifier: collectionsCellID)
+        cv.register(CollectionCell.self, forCellWithReuseIdentifier: collectionCellID)
+        cv.register(AlbumCell.self, forCellWithReuseIdentifier: albumCellID)
+        
         cv.register(SegmentedCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: segmentedCellID)
         return cv
     }()
@@ -148,7 +151,7 @@ class MainVC: UIViewController {
 
         switch mainSegment.selectedSegmentIndex {
         case 0:
-            let addCollection = AddCollectionVC()
+            let addCollection = AddPostVC()
             
             self.navigationController?.pushViewController(addCollection, animated: true)
 //            present(addCollection, animated: true)
@@ -239,16 +242,14 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionsCellID, for: indexPath) as! CollectionsCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellID, for: indexPath) as! CollectionCell
     
         switch mainSegment.selectedSegmentIndex {
         case 0:
             cell.backgroundColor = colorArray[indexPath.item]
             cell.backgroundColor = .clear
-            cell.titleLbl.text = collectionArray[indexPath.item]
+//            cell.titleLbl.text = collectionArray[indexPath.item]
 //            cell.lbl.textColor = .white
-            cell.titleLbl.isHidden = true
-            cell.counterLbl.isHidden = true
 
 //            cell.imageView.anchor(top: cell.topAnchor, leading: cell.leadingAnchor, bottom: cell.bottomAnchor, trailing: cell.trailingAnchor)
             cell.imageView.image = itemImage
@@ -256,22 +257,22 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
             cell.updateConstraints()
             navigationController?.navigationBar.topItem?.title = "My Collections"
         case 1:
-            cell.titleLbl.isHidden = false
-            cell.counterLbl.isHidden = false
+            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: albumCellID, for: indexPath) as! AlbumCell
 
 //            cell.backgroundColor = colorArray[indexPath.item]
-            cell.backgroundColor = .clear
-            cell.titleLbl.text = albumArray[indexPath.item][0]
-            cell.counterLbl.text = albumArray[indexPath.item][1]
+            cell2.backgroundColor = .clear
+            cell2.titleLbl.text = albumArray[indexPath.item][0]
+            cell2.counterLbl.text = albumArray[indexPath.item][1]
             
-            cell.titleLbl.textColor = .white
-            cell.titleLbl.font = .boldSystemFont(ofSize: 18)
+            cell2.titleLbl.textColor = .white
+            cell2.titleLbl.font = .boldSystemFont(ofSize: 18)
 
-            cell.counterLbl.textColor = .lightGray
-            cell.imageView.image = itemImage
+            cell2.counterLbl.textColor = .lightGray
+            cell2.imageView.image = itemImage
             navigationController?.navigationBar.topItem?.title = "Albums"
+            
+            return cell2
         default:
-            cell.titleLbl.isHidden = true
 //            cell.backgroundColor = .clear
 //            cell.backgroundColor = colorArray[indexPath.item]
             break
@@ -331,7 +332,7 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
         let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
         switch mainSegment.selectedSegmentIndex {
             case 0:
-                return CGSize(width: size, height: size + 50)
+                return CGSize(width: size, height: size)
             case 1:
                 return CGSize(width: size, height: size + 50)
             default:
@@ -345,9 +346,9 @@ extension MainVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
         
         switch mainSegment.selectedSegmentIndex {
         case 0:
-            return  -40
+            return  10
         case 1:
-            return  20
+            return  10
         default:
             break
         }

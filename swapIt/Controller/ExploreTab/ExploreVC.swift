@@ -9,6 +9,12 @@
 import UIKit
 import LBTATools
 
+let popularCellID = "popularCell"
+let recentCellID = "recentCell"
+let nearMeCellID = "nearMeCell"
+
+
+
 class ExploreVC: UIViewController {
     
     var filteredArray = [String]()
@@ -62,7 +68,10 @@ class ExploreVC: UIViewController {
                 cv.delegate = self
                 // preferredContentSize = layout.itemSize
                 /// registering cell
-                cv.register(ExploreCell.self, forCellWithReuseIdentifier: collectionsCellID)
+                cv.register(PopularCell.self, forCellWithReuseIdentifier: popularCellID)
+                cv.register(RecentCell.self, forCellWithReuseIdentifier: recentCellID)
+                cv.register(NearMeCell.self, forCellWithReuseIdentifier: nearMeCellID)
+
                 cv.register(SegmentedCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: segmentedCellID)
                 return cv
             }()
@@ -178,7 +187,7 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
         }
         
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionsCellID, for: indexPath) as! ExploreCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: popularCellID, for: indexPath) as! PopularCell
         
             switch mainSegmentThree.selectedSegmentIndex {
             case 0:
@@ -187,15 +196,21 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
                 cell.lbl.textColor = .white
                 navigationController?.navigationBar.topItem?.title = "Popular"
             case 1:
-                cell.backgroundColor = colorArray[indexPath.item]
-                cell.lbl.text = recentArray[indexPath.item]
-                cell.lbl.textColor = .white
+                let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: recentCellID, for: indexPath) as! RecentCell
+                cell2.backgroundColor = colorArray[indexPath.item]
+//                cell.lbl.text = recentArray[indexPath.item]
+//                cell.lbl.textColor = .white
                 navigationController?.navigationBar.topItem?.title = "Recent"
+                
+                return cell2
             case 2:
-                cell.backgroundColor = colorArray[indexPath.item]
-                cell.lbl.text = nearMeArray[indexPath.item]
-                cell.lbl.textColor = .white
+                let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: nearMeCellID, for: indexPath) as! NearMeCell
+                cell3.backgroundColor = colorArray[indexPath.item]
+//                cell.lbl.text = nearMeArray[indexPath.item]
+//                cell.lbl.textColor = .white
                 navigationController?.navigationBar.topItem?.title = "Near Me"
+                
+                return cell3
             default:
                 cell.backgroundColor = colorArray[indexPath.item]
                 break

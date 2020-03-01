@@ -185,8 +185,8 @@ class UserProfileVC: UIViewController {
         //        cancel.setValue(cancelVC, forKey: "contentViewController")
                 
                 /// alet textColor
-        alertController.view.tintColor = UIColor(displayP3Red: 253/255, green: 39/255, blue: 93/255, alpha: 1.5)
-
+//        alertController.view.tintColor = UIColor(displayP3Red: 253/255, green: 39/255, blue: 93/255, alpha: 1.5)
+        alertController.view.tintColor = .darkGray
                 let editProfile = UIAlertAction(title: "Edit Profile", style: .default) { (action) in
                     print("edit profile")
                     let editProfileVC = EditUserProfileVC()
@@ -204,6 +204,8 @@ class UserProfileVC: UIViewController {
                 alertController.addAction(aboutSwapIt)
                 alertController.addAction(logout)
                 alertController.addAction(cancel)
+                /// removes constraint warning coming from the alertController
+                alertController.pruneNegativeWidthConstraints()
                 
                 self.present(alertController, animated: true, completion: nil)
     }
